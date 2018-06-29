@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace' => 'Home'], function () {
+    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/blog', 'IndexController@blog')->name('blog');
+    Route::get('/contact', 'IndexController@contact')->name('contact');
+    Route::get('/gallery', 'IndexController@gallery')->name('gallery');
+    Route::get('/single', 'IndexController@single')->name('single');
 });

@@ -1,4 +1,4 @@
-@extends('common.base')
+@extends('home.common.base')
 @section('otherJs')
     <!--animate-->
     <link href="{{ asset('/static/css/animate.css') }}" rel="stylesheet" type="text/css" media="all">
@@ -11,10 +11,10 @@
 
 @section('content')
 
-    @include('common.header', ['current' => 'contact'])
+    @include('home.common.header', ['current' => 'contact'])
 
-    @include('common.contact')
+    @include('home.common.contact')
 
-    @include('common.footer')
+    @include('home.common.footer')
     
 @endsection

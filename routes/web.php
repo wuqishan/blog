@@ -18,3 +18,8 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/gallery', 'IndexController@gallery')->name('gallery');
     Route::get('/single', 'IndexController@single')->name('single');
 });
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::get('/', 'IndexController@index')->name('admin.index');
+    Route::resource('family', 'FamilyController');
+});

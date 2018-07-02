@@ -9,26 +9,26 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('home.index');
+        return view('home.index.index');
     }
 
     public function blog()
     {
-        return view('home.blog');
+        return view('home.index.blog');
     }
 
     public function contact()
     {
-        return view('home.contact');
+        return view('home.index.contact');
     }
 
     public function gallery()
     {
-        return view('home.gallery');
+        return view('home.index.gallery');
     }
 
     public function single()
     {
-        return view('home.single');
+        return view('home.index.single');
     }
 }

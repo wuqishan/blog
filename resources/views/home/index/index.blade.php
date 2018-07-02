@@ -1,4 +1,4 @@
-@extends('common.base')
+@extends('home.common.base')
 @section('otherJs')
     <!-- Add fancyBox main JS and CSS files -->
     <script src="{{ asset('/static/js/jquery.magnific-popup.js') }}" type="text/javascript"></script>
@@ -28,10 +28,10 @@
 
 @section('content')
 
-    @include('common.header', ['current' => 'blog'])
+    @include('home.common.header', ['current' => 'index'])
 
-    @include('common.blog')
+    @include('home.common.team')
 
-    @include('common.footer')
+    @include('home.common.footer')
 
 @endsection

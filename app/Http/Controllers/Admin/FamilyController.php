@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\FamilyService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class FamilyController extends Controller
 {
-    public function index()
+    public function index(Request $request, FamilyService $service)
     {
-        return view('admin.family.index');
+        if ($request->ajax()) {
+            $params = $request->all();
+            return $service->getFamilyByWhere($params);
+        } else {
+            return view('admin.family.index');
+        }
     }
 
     public function store()

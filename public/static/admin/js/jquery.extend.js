@@ -23,11 +23,11 @@ $.extend({
             // 垂直滚动条
             "scrollY": false,
             // 件数选择功能 默认true
-            "lengthChange": true,
+            "lengthChange": false,
             // 件数选择下拉框内容
             "lengthMenu": [3, 25, 50, 75, 100],
             // 每页的初期件数 用户可以操作lengthMenu上的值覆盖
-            "pageLength": 3,
+            "pageLength": 10,
             // 自动列宽
             "autoWidth": true,
             // 是否表示 "processing" 加载中的信息，这个信息可以修改

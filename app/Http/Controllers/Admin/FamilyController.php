@@ -23,9 +23,9 @@ class FamilyController extends Controller
 
     }
 
-    public function create()
+    public function create(Request $request, FamilyService $service)
     {
-
+        return view('admin.family.create');
     }
 
     public function show()

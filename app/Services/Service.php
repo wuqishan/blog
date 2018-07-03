@@ -15,7 +15,9 @@ class Service
         $this->_offset = request()->get('start', 0);
         $order = request()->get('order');
         $columns = request()->get('columns');
-        $this->_sortField = $columns[$order[0]['column']]['data'];
-        $this->_sortType = $order[0]['dir'];
+        if (isset($order[0]['column']) && $columns[$order[0]['column']]['data'] && isset($order[0]['dir'])) {
+            $this->_sortField = $columns[$order[0]['column']]['data'];
+            $this->_sortType = $order[0]['dir'];
+        }
     }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\FamilyRequest;
 use App\Services\FamilyService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class FamilyController extends Controller
 {
-    public function index(Request $request, FamilyService $service)
+    public function index(FamilyRequest $request, FamilyService $service)
     {
         if ($request->ajax()) {
             $params = $request->all();
@@ -18,9 +19,9 @@ class FamilyController extends Controller
         }
     }
 
-    public function store()
+    public function store(FamilyRequest $request, FamilyService $service)
     {
-
+        dd($request->all());
     }
 
     public function create(Request $request, FamilyService $service)

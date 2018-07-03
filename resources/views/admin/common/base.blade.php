@@ -25,6 +25,7 @@
 <script src="{{ asset('/static/admin/js/bootstrap.min.js') }}"></script>
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{ asset('/static/admin/js/plugins/pace.min.js') }}"></script>
+<script src="{{ asset('/static/admin/js/plugins/jquery.form.js') }}"></script>
 
 <script src="{{ asset('/static/admin/js/main.js') }}"></script>
 <script src="{{ asset('/static/admin/js/jquery.extend.js') }}"></script>

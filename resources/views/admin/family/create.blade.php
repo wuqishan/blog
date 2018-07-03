@@ -1,5 +1,7 @@
 @extends('admin.common.base')
-
+@section('otherStaticFirst')
+    <link rel="stylesheet" type="text/css" href="{{ asset('/static/admin/css/upload.css') }}">
+@endsection
 @section('content')
 
     @include('admin.common.header')
@@ -21,47 +23,50 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                        <form class="row">
-                            <div class="form-group col-md-4">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input class="form-control" type="email" placeholder="Enter email">
+                        <form id="form-data" class="row" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="form-group col-md-6">
+                                <label>名称 :</label>
+                                <input class="form-control" type="text" name="name" placeholder="请输入">
+                                <div class="form-control-feedback"></div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input class="form-control" type="password" placeholder="Password">
+                            <div class="form-group col-md-6">
+                                <label>年龄 :</label>
+                                <input class="form-control" type="number" name="age" placeholder="请输入">
+                                <div class="form-control-feedback"></div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="exampleSelect1">Example select</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                            <div class="form-group col-md-6">
+                                <label>关系 :</label>
+                                <input class="form-control" type="text" name="relationship" placeholder="请输入">
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input class="form-control" type="email" placeholder="Enter email">
+                            <div class="form-group col-md-6"></div>
+                            <div class="form-group col-md-12">
+                                <label>照片 :</label><br>
+                                <div class="upload-img-box">
+                                    <input type="file" name="photo" id="photo">
+                                    <img src="{{ asset('/static/admin/images/upload.png') }}">
+                                </div>
+                                <div class="upload-img-box">
+                                    <img src="{{ asset('/static/admin/images/upload.png') }}">
+                                </div>
+                                <div class="upload-img-box">
+                                    <img src="{{ asset('/static/admin/images/upload.png') }}">
+                                    <span>×</span>
+                                </div>
+                                <div class="bs-component upload-progress">
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input class="form-control" type="password" placeholder="Password">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="exampleSelect1">Example select</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                            <div class="form-group col-md-12">
+                                <label>简述 :</label>
+                                <textarea class="form-control" name="description" rows="3"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary submit" type="button">Submit</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +75,30 @@
 @endsection
 
 @section('otherStaticSecond')
+    <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/jquery.ui.widget.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/jquery.fileupload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/static/admin/js/upload.js') }}"></script>
     <!-- Data table plugin-->
     <script type="text/javascript">
+        $(function () {
+
+            upload_img('#photo', '{{ route("upload.photo") }}', {'_token': '{{ csrf_token() }}'});
+
+            $('.submit').click(function(){
+                alert(33);
+                $('#form-data').ajaxSubmit({
+                    url: '{{ route("family.store") }}',
+                    type: 'post',
+                    dataType: 'json',
+                    clearForm: true,
+                    success: function(res){
+                        console.log(res);
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                });
+            });
+        });
     </script>
 @endsection

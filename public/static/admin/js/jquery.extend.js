@@ -124,8 +124,25 @@ $.extend({
                         $(settings.showPosition).before(html);
                         $('.temp_files').val(data.result.data.id);
                     }
+                    $.notify({
+                        title: "上传附件 : ",
+                        message: "附件上传成功！",
+                        icon: 'fa fa-check'
+                    },{
+                        type: "success"
+                    });
+                } else {
+                    $.notify({
+                        title: "上传附件 : ",
+                        message: "附件上传失败！",
+                        icon: 'fa fa-warning'
+                    },{
+                        type: "warning"
+                    });
                 }
+
                 $('.upload-progress').hide();
+                $('.upload-progress .progress-bar').css('width', '0%');
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -134,6 +151,26 @@ $.extend({
         });
     },
     sys_del_upload_img: function (temp_files_id) {
-        alert(temp_files_id)
+        $.ajax({
+            url: '/admin/upload/delete/' + temp_files_id,
+            type: 'get',
+            data: {},
+            dataType: 'json',
+            success: function (res){
+                if (res.status) {
+                    $.notify({
+                        title: "删除附件 : ",
+                        message: "附件删除成功！",
+                        icon: 'fa fa-check'
+                    },{
+                        type: "success"
+                    });
+                    $('.upload-img-show').remove();
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     }
 });

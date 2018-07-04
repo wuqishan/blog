@@ -70,8 +70,9 @@
 @endsection
 
 @section('otherStaticSecond')
-    <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/jquery.ui.widget.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('/static/admin/js/plugins/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('/static/admin/js/plugins/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('/static/admin/js/plugins/jquery.fileupload.js') }}"></script>
     <!-- Data table plugin-->
     <script type="text/javascript">
         $(function () {

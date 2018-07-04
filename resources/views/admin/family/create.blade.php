@@ -10,20 +10,19 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-edit"></i> Form Components</h1>
-                <p>Bootstrap default form components</p>
+                <h1><i class="fa fa-plus-square"></i> 添加家庭成员</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Forms</li>
-                <li class="breadcrumb-item"><a href="#">Form Components</a></li>
+                <li class="breadcrumb-item">家庭成员管理</li>
+                <li class="breadcrumb-item"><a href="#">列表</a></li>
             </ul>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                        <form id="form-data" class="row" enctype="multipart/form-data">
+                        <form id="form-data" class="row">
                             {{ csrf_field() }}
                             <div class="form-group col-md-6">
                                 <label>名称 :</label>

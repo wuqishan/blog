@@ -2,23 +2,28 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Storage;
+
 class UploadService extends Service
 {
     public function storePhoto()
     {
-        $file = request()->file('photo');
-
+        $results = [
+            'status' => false,
+            'data' => ['filename' => '', 'origin_name' => '', 'filepath' => '']
+        ];
         // 文件是否上传成功
-        if ($file->isValid()) {
-
-            // 获取文件相关信息
-            $originalName = $file->getClientOriginalName(); // 文件原名
-            $ext = $file->getClientOriginalExtension();     // 扩展名
-            $realPath = $file->getRealPath();   //临时文件的绝对路径
-            $type = $file->getClientMimeType();     // image/jpeg
-
-            dd($originalName, $ext, $realPath, $type);
-
+        if (request()->hasFile('photo')) {
+            $file = request()->file('photo');
+            if ($file->isValid()) {
+                $results['data']['origin_name'] = $file->getClientOriginalName(); // 文件原名
+                $results['data']['filename'] = md5($results['data']['origin_name'] . date('YmdHis')) . '.' . $file->getClientOriginalExtension();
+                $results['data']['filepath'] = config('filesystems.disks.public.url');
+                $realPath = $file->getRealPath();   //临时文件的绝对路径
+                $results['status'] = Storage::disk('public')->put($results['data']['filename'],file_get_contents($realPath));
+            }
         }
+
+        return $results;
     }
 }

@@ -78,4 +78,62 @@ $.extend({
         var settings = $.extend(optionDefault, option);
         $(selector).DataTable(settings);
     },
+    /**
+     * @param option
+     */
+    sys_upload_img: function (option)
+    {
+        var optionDefault = {
+            'selector': '#upload',
+            'showPosition': '#file-input-position-control',
+            'url': '',
+            'formData': {},
+            'multiple': false
+        };
+        var settings = $.extend(optionDefault, option);
+        $(settings.selector).fileupload({
+            url: settings.url,
+            dataType: 'json',
+            autoUpload: true,
+            formData: settings.formData,
+            maxFileSize: 1000000, // 10 MB
+            add: function (e, data) {
+                data.submit();
+                $('.upload-progress').show();
+            },
+            done: function (e, data) {
+                var htmlTemplate = '<div class="upload-img-box upload-img-show">' +
+                    '<img src="{{src}}">' +
+                    '<a href="javascript:void(0);" onclick="$.sys_del_upload_img({{id}})" title="删除">×</a>' +
+                    '</div>';
+                if (data.result.status) {
+                    if (settings.multiple) {
+                        var html = htmlTemplate.replace('{{src}}', data.result.data.filepath + data.result.data.filename);
+                        html = html.replace('{{id}}', data.result.data.id);
+                        $(settings.showPosition).before(html);
+                        var hasVal = $('.temp_files').val() == '' ? false : true;
+                        if (hasVal) {
+                            $('.temp_files').val($('.temp_files').val() + ',' + data.result.data.id);
+                        } else {
+                            $('.temp_files').val(data.result.data.id)
+                        }
+                    } else {
+                        var html = htmlTemplate.replace('{{src}}', data.result.data.filepath + data.result.data.filename);
+                        html = html.replace('{{id}}', data.result.data.id);
+                        $('.upload-img-show').remove();
+                        $(settings.showPosition).before(html);
+                        $('.temp_files').val(data.result.data.id);
+                    }
+                }
+                $('.upload-progress').hide();
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('.upload-progress .progress-bar').css('width', progress + '%');
+            }
+        });
+    },
+    sys_del_upload_img: function (temp_files_id) {
+        alert(temp_files_id)
+    }
 });

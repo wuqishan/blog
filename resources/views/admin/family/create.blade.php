@@ -42,22 +42,17 @@
                             <div class="form-group col-md-6"></div>
                             <div class="form-group col-md-12">
                                 <label>照片 :</label><br>
-                                <div class="upload-img-box">
-                                    <input type="file" name="photo" id="photo">
+
+                                <div class="upload-img-box" id="file-input-position-control">
+                                    <input type="file" name="photo" id="photo" multiple>
                                     <img src="{{ asset('/static/admin/images/upload.png') }}">
-                                </div>
-                                <div class="upload-img-box">
-                                    <img src="{{ asset('/static/admin/images/upload.png') }}">
-                                </div>
-                                <div class="upload-img-box">
-                                    <img src="{{ asset('/static/admin/images/upload.png') }}">
-                                    <span>×</span>
                                 </div>
                                 <div class="bs-component upload-progress">
                                     <div class="progress mb-2">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="temp_files" class="temp_files" value="">
                             </div>
                             <div class="form-group col-md-12">
                                 <label>简述 :</label>
@@ -77,15 +72,20 @@
 @section('otherStaticSecond')
     <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/jquery.ui.widget.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/jquery.fileupload.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/static/admin/js/upload.js') }}"></script>
     <!-- Data table plugin-->
     <script type="text/javascript">
         $(function () {
 
-            upload_img('#photo', '{{ route("upload.photo") }}', {'_token': '{{ csrf_token() }}'});
+            var option = {
+                'selector': '#photo',
+                'showPosition': '#file-input-position-control',
+                'url': '{{ route("upload.photo") }}',
+                'formData': {'_token': '{{ csrf_token() }}'},
+                'multiple': false
+            };
+            $.sys_upload_img(option);
 
             $('.submit').click(function(){
-                alert(33);
                 $('#form-data').ajaxSubmit({
                     url: '{{ route("family.store") }}',
                     type: 'post',

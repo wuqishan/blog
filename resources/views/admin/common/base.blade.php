@@ -12,7 +12,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/static/admin/css/modify.css') }}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/static/admin/css/font-awesome.min.css') }}">
-
+    <script>
+        var formData = {};  // 筛选使用
+    </script>
     @yield('otherStaticFirst')
 </head>
 <body class="app sidebar-mini rtl">

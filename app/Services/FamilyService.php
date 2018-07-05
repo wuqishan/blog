@@ -27,8 +27,9 @@ class FamilyService extends Service
         $family = new Family();
         $family->name = strip_tags($params['name']);
         $family->age = intval($params['age']);
-        $family->relationship = strip_tags($params['name']);
-        $family->description = strip_tags($params['name']);
+        $family->title = strip_tags($params['title']);
+        $family->relationship = strip_tags($params['relationship']);
+        $family->description = strip_tags($params['description']);
         $family->photo = $this->getPhotoInfo($params['temp_files']);
         $family->save();
 

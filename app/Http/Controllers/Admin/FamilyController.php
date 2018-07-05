@@ -21,10 +21,11 @@ class FamilyController extends Controller
 
     public function store(FamilyRequest $request, FamilyService $service)
     {
-        $results = [];
+        $results = ['status' => false];
         $params = $request->all();
-        $results = $service->saveFamily($params);
-//        dd();
+        $results['status'] = (bool) $service->saveFamily($params);
+
+        return $results;
     }
 
     public function create(Request $request, FamilyService $service)

@@ -6,8 +6,8 @@ class Service
 {
     public $_length;
     public $_offset;
-    public $_sortField;
-    public $_sortType;
+    public $_sort_field;
+    public $_sort_type;
 
     public function __construct()
     {
@@ -16,8 +16,8 @@ class Service
         $order = request()->get('order');
         $columns = request()->get('columns');
         if (isset($order[0]['column']) && $columns[$order[0]['column']]['data'] && isset($order[0]['dir'])) {
-            $this->_sortField = $columns[$order[0]['column']]['data'];
-            $this->_sortType = $order[0]['dir'];
+            $this->_sort_field = $columns[$order[0]['column']]['data'];
+            $this->_sort_type = $order[0]['dir'];
         }
     }
 }

@@ -92,10 +92,16 @@
                     dataType: 'json',
                     clearForm: true,
                     success: function(res){
-                        console.log(res);
+                        // console.log(res);
                     },
                     error: function(err){
                         console.log(err);
+                        if (err.hasOwnProperty('responseJSON') && err.responseJSON.hasOwnProperty('errors')) {
+                            for (var i in err.responseJSON.errors) {
+                                $('[name='+ i +']').next('.form-control-feedback').html(err.responseJSON.errors[i][0]);
+                            }
+                        }
+
                     }
                 });
             });

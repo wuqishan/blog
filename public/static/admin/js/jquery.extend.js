@@ -10,7 +10,7 @@ $.extend({
      * @param server
      * @param option
      */
-    sys_page: function (selector, server, option, formData) {
+    sys_page: function (selector, server, option) {
         var optionDefault = {
             "searching": false,
             "ordering": true,
@@ -63,7 +63,7 @@ $.extend({
                 url: server,
                 type: 'GET',
                 data: function (param) {
-                    param.formData = formData;
+                    param.formData = window.formData;
                     return param;
                 },
                 dataSrc: function (myJson) {
@@ -76,7 +76,8 @@ $.extend({
             "columns": []
         };
         var settings = $.extend(optionDefault, option);
-        $(selector).DataTable(settings);
+
+        return $(selector).DataTable(settings);
     },
     /**
      * @param option
@@ -124,21 +125,10 @@ $.extend({
                         $(settings.showPosition).before(html);
                         $('.temp_files').val(data.result.data.id);
                     }
-                    $.notify({
-                        title: "上传附件 : ",
-                        message: "附件上传成功！",
-                        icon: 'fa fa-check'
-                    },{
-                        type: "success"
-                    });
+
+                    $.sys_notify("上传附件 : ", "附件上传成功！", 'fa fa-check', "success");
                 } else {
-                    $.notify({
-                        title: "上传附件 : ",
-                        message: "附件上传失败！",
-                        icon: 'fa fa-warning'
-                    },{
-                        type: "warning"
-                    });
+                    $.sys_notify("上传附件 : ", "附件上传失败！", 'fa fa-warning', "warning");
                 }
 
                 $('.upload-progress').hide();
@@ -158,13 +148,7 @@ $.extend({
             dataType: 'json',
             success: function (res){
                 if (res.status) {
-                    $.notify({
-                        title: "删除附件 : ",
-                        message: "附件删除成功！",
-                        icon: 'fa fa-check'
-                    },{
-                        type: "success"
-                    });
+                    $.sys_notify("删除附件 : ", "附件删除成功！", 'fa fa-check', "success");
                     $('.upload-img-show').remove();
                 }
             },
@@ -199,6 +183,18 @@ $.extend({
                     }
                 }
             }
+        });
+    },
+    sys_notify: function (title, message, icon, type, delay) {
+        delay = typeof delay !== 'undefined' ?  delay : 1000;
+        $.notify({
+            title: title,
+            message: message,
+            icon: icon
+
+        },{
+            type: type,
+            delay:delay
         });
     }
 });

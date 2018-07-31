@@ -10,6 +10,8 @@ class FamilyRequest extends FormRequest
     public $rules = [
         'family.store' => [
             'name' => 'required',
+            'title' => 'required',
+            'temp_files' => 'required',
             'age' => 'required|integer|min:0|max:128'
         ]
     ];
@@ -47,6 +49,8 @@ class FamilyRequest extends FormRequest
     {
         return [
             'name.required' => '名称必须填写',
+            'title.required' => '称谓必须填写',
+            'temp_files.required' => '照片必须上传',
             'age.required' => '年龄必须填写范围：0~128',
             'age.min' => '年龄必须填写范围：0~128',
             'age.integer' => '年龄必须填写范围：0~128',

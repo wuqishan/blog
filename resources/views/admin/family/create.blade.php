@@ -10,7 +10,7 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-plus-square"></i> 添加家庭成员</h1>
+                <h1> 家庭成员管理</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -21,6 +21,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4 class="mb-3 line-head"><i class="fa fa-plus-square"></i> 添加家庭成员</h4>
+                            </div>
+                        </div>
+                    </div>
                     <div class="tile-body">
                         <form id="form-data" class="row">
                             {{ csrf_field() }}
@@ -35,10 +42,15 @@
                                 <div class="form-control-feedback"></div>
                             </div>
                             <div class="form-group col-md-6">
+                                <label>称谓 :</label>
+                                <input class="form-control" type="text" name="title" placeholder="请输入">
+                                <div class="form-control-feedback"></div>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label>关系 :</label>
                                 <input class="form-control" type="text" name="relationship" placeholder="请输入">
+                                <div class="form-control-feedback"></div>
                             </div>
-                            <div class="form-group col-md-6"></div>
                             <div class="form-group col-md-12">
                                 <label>照片 :</label><br>
 
@@ -52,6 +64,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="temp_files" class="temp_files" value="">
+                                <div class="form-control-feedback"></div>
                             </div>
                             <div class="form-group col-md-12">
                                 <label>简述 :</label>
@@ -92,16 +105,18 @@
                     dataType: 'json',
                     clearForm: true,
                     success: function(res){
-                        // console.log(res);
+                        if (res.status) {
+                            $.sys_notify("成员添加 : ", "成员添加成功！", 'fa fa-check', "success");
+                            setTimeout("location.reload()", 3000 );
+                        }
                     },
                     error: function(err){
-                        console.log(err);
+                        $('.form-control-feedback').html('');
                         if (err.hasOwnProperty('responseJSON') && err.responseJSON.hasOwnProperty('errors')) {
                             for (var i in err.responseJSON.errors) {
                                 $('[name='+ i +']').next('.form-control-feedback').html(err.responseJSON.errors[i][0]);
                             }
                         }
-
                     }
                 });
             });

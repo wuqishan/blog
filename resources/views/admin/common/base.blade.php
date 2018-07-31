@@ -17,6 +17,8 @@
     <script type="text/javascript">
         // 当前路由名称
         var routeName = '{{ \App\Helper\NavHelper::highlight() }}';
+        // 筛选使用
+        var formData = {};
     </script>
     @yield('otherStaticFirst')
 </head>

@@ -13,6 +13,11 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/static/admin/css/font-awesome.min.css') }}">
 
+    {{-- 全局变量 --}}
+    <script type="text/javascript">
+        // 当前路由名称
+        var routeName = '{{ \App\Helper\NavHelper::highlight() }}';
+    </script>
     @yield('otherStaticFirst')
 </head>
 <body class="app sidebar-mini rtl">

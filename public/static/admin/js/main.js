@@ -24,4 +24,16 @@
 	//Activate bootstrip tooltips
 	$("[data-toggle='tooltip']").tooltip();
 
+	// 左侧menu高亮
+	$('#app-menu .treeview-item').each(function (i) {
+		var dataNav = $(this).attr('data-nav');
+		if (window.routeName == '') {
+			return true;
+		}
+		if (dataNav == window.routeName) {
+            $(this).parents('li.treeview').addClass('is-expanded');
+			$(this).addClass('active');
+			return true;
+		}
+    });
 })();

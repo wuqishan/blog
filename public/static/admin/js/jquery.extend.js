@@ -172,5 +172,33 @@ $.extend({
                 console.log(err);
             }
         });
+    },
+    sys_submit: function (option) {
+        var optionDefault = {
+            'formSelector': '#form-data',
+            'url': '',
+            'goTo': '',
+            'data': {}
+        };
+        var settings = $.extend(optionDefault, option);
+        $(settings.formSelector).ajaxSubmit({
+            url: settings.url,
+            type: 'post',
+            dataType: 'json',
+            data:settings.data,
+            clearForm: true,
+            success: function(results){
+                if (results.status) {
+                    location.href = settings.goTo;
+                }
+            },
+            error: function(err){
+                if (err.hasOwnProperty('responseJSON') && err.responseJSON.hasOwnProperty('errors')) {
+                    for (var i in err.responseJSON.errors) {
+                        $('[name='+ i +']').next('.form-control-feedback').html(err.responseJSON.errors[i][0]);
+                    }
+                }
+            }
+        });
     }
 });

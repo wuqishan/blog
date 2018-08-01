@@ -9,14 +9,17 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request, CategoryService $service)
     {
-        return view('admin.category.index');
+        $results['list'] = $service->getList();
+
+        return view('admin.category.index', ['results' => $results]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request, CategoryService $service)
     {
-        return view('admin.category.create');
+        $results['form'] = $service->getForm();
+        return view('admin.category.create', ['results' => $results]);
     }
 
     public function store(CategoryRequest $request, CategoryService $service)

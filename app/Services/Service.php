@@ -38,7 +38,6 @@ class Service
         foreach ($prev_formatter as $v) {
             $func = $v['func'];
             $key = $v['key'];
-//            dd($func, $key, $params);
             $params = call_user_func("$class::$func", $params, $key);
         }
 

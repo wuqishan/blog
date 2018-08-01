@@ -40,7 +40,26 @@
                         </form>
                     </div>
                     <div class="tile-body">
-                        <table class="table table-hover table-bordered" id="sampleTable"></table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>名称</th>
+                                <th>等级</th>
+                                <th>排序</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($results['list']['data'] as $v)
+                                    <tr class="@if($v['level'] == 1){{ 'table-success' }}@elseif($v['level'] == 2){{ 'table-info' }}@else{{ 'table-danger' }}@endif">
+                                        <td>{{ $v['id'] }}</td>
+                                        <td>---{{ $v['html'] }} {{ $v['title'] }}</td>
+                                        <td>{{ $v['level'] }}</td>
+                                        <td>{{ $v['order'] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -50,29 +69,7 @@
 
 @section('otherStaticSecond')
     <!-- Data table plugin-->
-    <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/static/admin/js/plugins/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">
-        var option = {
-            'columns': [
-                {"data": 'id', 'title': 'ID', 'orderable': true},
-                {"data": 'name', 'title': '名称', 'orderable': false},
-                {"data": 'age', 'title': '年龄', 'orderable': true},
-                {"data": 'description', 'title': '描述', 'orderable': false},
-                {"data": null, 'title': '操作', 'orderable': false},
-            ],
-            'columnDefs': [
-                {
-                    targets: 4,
-                    render: function (a, b, c, d) {
-                        var context = '<input type="button" onclick="edit('+ a.id +')" class="btn btn-info btn-sm" value="编辑">'
-                        context += ' <input type="button" del('+ a.id +') class="btn btn-danger btn-sm" value="删除">';
-                        return context;
-                    },
-                    width: 100
-                }
-            ]
-        };
-        $.sys_page('#sampleTable', '{{ route('family.index') }}', option, {});
+
     </script>
 @endsection

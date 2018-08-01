@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helper\TreeHelper;
 use App\Model\Category;
 use App\Model\Family;
 use App\Model\TempFiles;
@@ -35,8 +36,6 @@ class CategoryService extends Service
 
     /**
      * 初始化
-     *
-     * CategoryService constructor.
      */
     public function __construct()
     {
@@ -45,11 +44,27 @@ class CategoryService extends Service
         $this->_model = new Category();
     }
 
+    public function getList()
+    {
+        $category = $this->_model::orderBy('order', 'asc')->get()->toArray();
+        $results['data'] = TreeHelper::unlimitedForLevel($category, '---');
+
+        return $results;
+    }
+
     public function saveData($params)
     {
         $this->model = $this->normalSaveData($this->_model, $this->_prev_save_formatter, $this->_save_field, $params);
         $this->model->save();
 
         return $this->model->id;
+    }
+
+    public function getForm()
+    {
+        $category = $this->_model::whereIn('level', [1, 2])->get()->toArray();
+        $results['data'] = TreeHelper::unlimitedForLevel($category, '---');
+
+        return $results;
     }
 }

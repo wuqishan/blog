@@ -33,8 +33,10 @@
                             <div class="form-group col-md-6">
                                 <label>父级分类 :</label>
                                 <select class="form-control" name="parent_id">
-                                    <option value="0" level="1">-- 顶级分类</option>
-                                    <option value="0" level="2">-- 顶级分类2</option>
+                                    <option value="0" level="1">--- 顶级分类</option>
+                                    @foreach($results['form']['data'] as $v)
+                                        <option value="{{ $v['id'] }}" level="{{ $v['level'] + 1 }}">------{{ $v['html'] }} {{ $v['title'] }}</option>
+                                    @endforeach
                                 </select>
                                 <div class="form-control-feedback"></div>
                             </div>

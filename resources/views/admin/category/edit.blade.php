@@ -24,31 +24,29 @@
                     <div class="tile-body">
                         <form id="form-data" class="row">
                             {{ csrf_field() }}
+                            {{ method_field('put') }}
                             <input type="hidden" name="level" value="1">
                             <div class="form-group col-md-6">
                                 <label>分类名称 :</label>
-                                <input class="form-control" type="text" name="title" placeholder="请输入">
+                                <input class="form-control" value="{{ $results['detail']['title'] }}" type="text" name="title" placeholder="请输入">
                                 <div class="form-control-feedback"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>父级分类 :</label>
-                                <select class="form-control" name="parent_id">
-                                    <option value="0" level="1">━━━ 顶级分类</option>
-                                    @foreach($results['form']['data'] as $v)
-                                        <option value="{{ $v['id'] }}" level="{{ $v['level'] + 1 }}">------{{ $v['html'] }} {{ $v['title'] }}</option>
-                                    @endforeach
+                                <select class="form-control" name="parent_id" disabled="disabled">
+                                    <option value="0" level="1">━━━ 禁止修改</option>
                                 </select>
                                 <div class="form-control-feedback"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>显示顺序 :</label>
-                                <input class="form-control" type="text" name="order" placeholder="请输入">
+                                <input class="form-control" value="{{ $results['detail']['order'] }}" type="text" name="order" placeholder="请输入">
                                 <div class="form-control-feedback"></div>
                             </div>
                             <div class="form-group col-md-6"></div>
                             <div class="form-group col-md-12">
                                 <label>简述 :</label>
-                                <textarea class="form-control" name="description" rows="3"></textarea>
+                                <textarea class="form-control" name="description" rows="3">{{ $results['detail']['description'] }}</textarea>
                             </div>
                         </form>
                     </div>
@@ -70,8 +68,8 @@
         $(function () {
             var sub_opt = {
                 'formSelector': '#form-data',
-                'url': '{{ route("category.store") }}',
-                'goTo': '{{ route('category.index') }}'
+                'url': '{{ route("admin::category.update", ['category' => request()->category]) }}',
+                'goTo': '{{ route('admin::category.index') }}'
             };
             $('.submit').click(function () {
                 $.sys_submit(sub_opt);

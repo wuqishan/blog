@@ -30,6 +30,23 @@ class CategoryController extends Controller
         return $results;
     }
 
+    public function edit(Request $request, CategoryService $service)
+    {
+        $id = $request->category;
+        $results['detail'] = $service->getDetail($id);
+
+        return view('admin.category.edit', ['results' => $results]);
+    }
+
+    public function update(CategoryRequest $request, CategoryService $service)
+    {
+        $results = ['status' => false];
+        $id = $request->category;
+        $results['status'] = (bool) $service->updateData($id, $request->all());
+
+        return $results;
+    }
+
     public function destroy(Request $request, CategoryService $service)
     {
         $results = ['status' => false];

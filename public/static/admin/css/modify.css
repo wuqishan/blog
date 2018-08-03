@@ -17,3 +17,7 @@ body, div, p, span, i, label, input, h1, h2, h3, h4, h5, h6, button {
 .form-control-feedback {
     color: #c82333;
 }
+
+.toggle label {
+    margin-bottom: 0px;
+}

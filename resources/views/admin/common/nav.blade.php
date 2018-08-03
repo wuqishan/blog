@@ -22,8 +22,8 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" data-nav="family.index" href="{{ route('family.index') }}"><i class="icon fa fa-circle-o"></i> 成员列表</a></li>
-                <li><a class="treeview-item" data-nav="category.index" href="{{ route('category.index') }}"><i class="icon fa fa-circle-o"></i> 分类管理</a></li>
+                <li><a class="treeview-item" data-nav="admin::family.index" href="{{ route('admin::family.index') }}"><i class="icon fa fa-circle-o"></i> 成员列表</a></li>
+                <li><a class="treeview-item" data-nav="admin::category.index" href="{{ route('admin::category.index') }}"><i class="icon fa fa-circle-o"></i> 分类管理</a></li>
             </ul>
         </li>
 
@@ -37,14 +37,11 @@
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-edit"></i>
-                <span class="app-menu__label">Forms</span>
+                <span class="app-menu__label">访客管理</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form Components</a></li>
-                <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom Components</a></li>
-                <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
-                <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
+                <li><a class="treeview-item" data-nav="admin::comment.index" href="{{ route('admin::comment.index') }}"><i class="icon fa fa-circle-o"></i>评论管理</a></li>
             </ul>
         </li>
 

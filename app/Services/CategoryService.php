@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Helper\TreeHelper;
 use App\Model\Category;
-use App\Model\Family;
-use App\Model\TempFiles;
 
 class CategoryService extends Service
 {
@@ -22,6 +20,13 @@ class CategoryService extends Service
     ];
 
     /**
+     * 哪些字段需要更新
+     */
+    public $_update_field = [
+        'title', 'order', 'description'
+    ];
+
+    /**
      * 保存前的处理
      *
      * @var array
@@ -31,6 +36,17 @@ class CategoryService extends Service
         ['key' => 'parent_id', 'func' => 'int'],
         ['key' => 'order', 'func' => 'int'],
         ['key' => 'level', 'func' => 'int'],
+        ['key' => 'description', 'func' => 'stripTags'],
+    ];
+
+    /**
+     * 更新前的处理
+     *
+     * @var array
+     */
+    public $_prev_update_formatter = [
+        ['key' => 'title', 'func' => 'stripTags'],
+        ['key' => 'order', 'func' => 'int'],
         ['key' => 'description', 'func' => 'stripTags'],
     ];
 
@@ -54,10 +70,26 @@ class CategoryService extends Service
 
     public function saveData($params)
     {
-        $this->model = $this->normalSaveData($this->_model, $this->_prev_save_formatter, $this->_save_field, $params);
-        $this->model->save();
+        $model = $this->normalSaveData($this->_model, $this->_prev_save_formatter, $this->_save_field, $params);
+        $model->save();
 
-        return $this->model->id;
+        return $model->id;
+    }
+
+    public function updateData($id, $params)
+    {
+        $mode = $this->_model->find($id);
+        $model = $this->normalSaveData($mode, $this->_prev_update_formatter, $this->_update_field, $params);
+        $model->save();
+
+        return $model->id;
+    }
+
+    public function getDetail($id)
+    {
+        $results = $this->_model->find($id)->toArray();
+
+        return $results;
     }
 
     public function delete($id)

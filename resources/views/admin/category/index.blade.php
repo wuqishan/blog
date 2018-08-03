@@ -28,10 +28,10 @@
                             <div class="form-group col-md-7">
                             </div>
                             <div class="form-group col-md-1 align-self-end">
-                                <a class="btn btn-outline-info pull-right" href="{{ route('category.create') }}"><i class="fa fa-fw fa-lg fa-check-circle"></i>搜索</a>
+                                <a class="btn btn-outline-info pull-right" href="{{ route('admin::category.create') }}"><i class="fa fa-fw fa-lg fa-check-circle"></i>搜索</a>
                             </div>
                             <div class="form-group col-md-1 align-self-end">
-                                <a class="btn btn-outline-success pull-right" href="{{ route('category.create') }}"><i class="fa fa-fw fa-lg fa-check-circle"></i>新增</a>
+                                <a class="btn btn-outline-success pull-right" href="{{ route('admin::category.create') }}"><i class="fa fa-fw fa-lg fa-check-circle"></i>新增</a>
                             </div>
                         </form>
                     </div>
@@ -51,8 +51,8 @@
                                         <td>┏━━━{{ $v['html'] }} {{ $v['title'] }}</td>
                                         <td>{{ $v['level'] }}</td>
                                         <td>{{ $v['order'] }}</td>
-                                        <td width="100">
-                                            {!! \App\Helper\OptionBtnHelper::get('edit', route('category.edit', ['category' => $v['id']])) !!}
+                                        <td width="120">
+                                            {!! \App\Helper\OptionBtnHelper::get('edit', route('admin::category.edit', ['category' => $v['id']])) !!}
                                             {!! \App\Helper\OptionBtnHelper::get('del', 'del_record(\''. $v['id'] .'\')') !!}
                                         </td>
                                     </tr>
@@ -81,8 +81,8 @@
                     'dataType': 'json',
                     'success': function (results) {
                         if (results.status) {
-                            layer.msg('删除成功！', {'anim': -1, 'time': 3,}, function () {
-                                location.href = '{{ route('category.index') }}'
+                            layer.msg('删除成功！', {'anim': -1, 'time': 4,}, function () {
+                                location.href = '{{ route('admin::category.index') }}'
                             });
                         } else {
                             layer.msg('只能从最低层分类开始删除！');

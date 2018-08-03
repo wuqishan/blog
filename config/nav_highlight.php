@@ -1,17 +1,22 @@
 <?php
 
 /**
- * 左侧菜单高亮配置
+ * 左侧菜单高亮配置，这里配置的都是路由名称
  *
  */
 
 return [
-    'family.index' => [
-        'family.index',
-        'family.create'
+    'admin::family.index' => [
+        'admin::family.index',
+        'admin::family.create'
     ],
-    'category.index' => [
-        'category.index',
-        'category.create'
-    ]
+    'admin::category.index' => [
+        'admin::category.index',
+        'admin::category.edit',
+        'admin::category.create'
+    ],
+    'admin::comment.index' => [
+        'admin::comment.index'
+    ],
+    //
 ];

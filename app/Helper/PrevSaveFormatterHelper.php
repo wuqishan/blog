@@ -8,7 +8,7 @@ namespace App\Helper;
  * Class SaveFilter
  * @package App\Helper
  */
-class PrevSaveFormatter
+class PrevSaveFormatterHelper
 {
     public static function int($params, $k)
     {

@@ -35,7 +35,7 @@
                                 <select class="form-control" name="parent_id">
                                     <option value="0" level="1">━━━ 顶级分类</option>
                                     @foreach($results['form']['data'] as $v)
-                                        <option value="{{ $v['id'] }}" level="{{ $v['level'] + 1 }}">------{{ $v['html'] }} {{ $v['title'] }}</option>
+                                        <option value="{{ $v['id'] }}" level="{{ $v['level'] + 1 }}">━━━━━━{{ $v['html'] }} {{ $v['title'] }}</option>
                                     @endforeach
                                 </select>
                                 <div class="form-control-feedback"></div>
@@ -70,8 +70,8 @@
         $(function () {
             var sub_opt = {
                 'formSelector': '#form-data',
-                'url': '{{ route("category.store") }}',
-                'goTo': '{{ route('category.index') }}'
+                'url': '{{ route("admin::category.store") }}',
+                'goTo': '{{ route('admin::category.index') }}'
             };
             $('.submit').click(function () {
                 $.sys_submit(sub_opt);

@@ -12,6 +12,10 @@ class CategoryRequest extends FormRequest
             'title' => 'required',
             'order' => 'required|integer',
             'parent_id' => 'required|integer',
+        ],
+        'category.update' => [
+            'title' => 'required',
+            'order' => 'required|integer'
         ]
     ];
 

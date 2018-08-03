@@ -2,52 +2,56 @@
 
 namespace App\Services;
 
-use App\Helper\PrevSaveFormatter;
+use App\Helper\PrevSaveFormatterHelper;
 
 class Service
 {
     public $_length;
+    public $_page;
     public $_offset;
-    public $_sort_field;
-    public $_sort_type;
+    public $_page_number;
 
     public function __construct()
     {
         $this->_length = request()->get('length', 10);
-        $this->_offset = request()->get('start', 0);
-        $order = request()->get('order');
-        $columns = request()->get('columns');
-        if (isset($order[0]['column']) && $columns[$order[0]['column']]['data'] && isset($order[0]['dir'])) {
-            $this->_sort_field = $columns[$order[0]['column']]['data'];
-            $this->_sort_type = $order[0]['dir'];
-        }
+        $this->_page_number = request()->get('page_number', 15);
+        $this->_page = request()->get('page', 1);
+        $this->_offset = ($this->_page - 1) * $this->_length;
     }
 
     /**
-     * 一般的数据保存
+     * 一般的数据保存和更新
      *
      * @param $model
-     * @param $save_field
+     * @param $prev_formatter
+     * @param $process_field
      * @param $params
      * @return mixed
      */
-    public function normalSaveData($model, $prev_formatter, $save_field, $params)
+    public function normalSaveData($model, $prev_formatter, $process_field, $params)
     {
         // 先做保存前的处理
-        $class = PrevSaveFormatter::class;
+        $class = PrevSaveFormatterHelper::class;
         foreach ($prev_formatter as $v) {
             $func = $v['func'];
             $key = $v['key'];
             $params = call_user_func("$class::$func", $params, $key);
         }
 
-        foreach ($save_field as $v) {
+        foreach ($process_field as $v) {
             $model->$v = $params[$v];
         }
 
         return $model;
     }
 
+    /**
+     * 按照ID删除
+     *
+     * @param $model
+     * @param $id
+     * @return mixed
+     */
     public function normalDelete($model, $id)
     {
         return $model->destroy($id);

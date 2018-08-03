@@ -19,10 +19,14 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/single', 'IndexController@single')->name('single');
 });
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function () {
     Route::get('/', 'IndexController@index')->name('admin.index');
-    Route::resource('family', 'FamilyController');
-    Route::resource('category', 'CategoryController');
     Route::post('photo', 'UploadController@photo')->name('upload.photo');
     Route::get('upload/delete/{id}', 'UploadController@delete')->name('upload.delete');
+
+    Route::resource('family', 'FamilyController');
+    Route::resource('category', 'CategoryController');
+
+    Route::get('comment', 'CommentController@index')->name('comment.index');
+    Route::post('comment/change_show/{id}', 'CommentController@changeShow')->name('comment.change.show');
 });

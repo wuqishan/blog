@@ -47,4 +47,9 @@ class Service
 
         return $model;
     }
+
+    public function normalDelete($model, $id)
+    {
+        return $model->destroy($id);
+    }
 }

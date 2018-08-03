@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/static/admin/css/modify.css') }}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/static/admin/css/font-awesome.min.css') }}">
+    <!-- color css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/static/admin/css/color.css') }}">
 
     {{-- 全局变量 --}}
     <script type="text/javascript">
@@ -33,9 +35,11 @@
 <!-- The javascript plugin to display page loading on top-->
 <script src="{{ asset('/static/admin/js/plugins/pace.min.js') }}"></script>
 <script src="{{ asset('/static/admin/js/plugins/jquery.form.js') }}"></script>
+<script src="{{ asset('/static/admin/js/layer/layer.js') }}"></script>
 
 <script src="{{ asset('/static/admin/js/main.js') }}"></script>
 <script src="{{ asset('/static/admin/js/jquery.extend.js') }}"></script>
+<script src="{{ asset('/static/admin/js/my.extend.js') }}"></script>
 
 @yield('otherStaticSecond')
 </body>

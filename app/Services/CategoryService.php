@@ -47,7 +47,7 @@ class CategoryService extends Service
     public function getList()
     {
         $category = $this->_model::orderBy('order', 'asc')->get()->toArray();
-        $results['data'] = TreeHelper::unlimitedForLevel($category, '---');
+        $results['data'] = TreeHelper::unlimitedForLevel($category, '━━━');
 
         return $results;
     }
@@ -60,11 +60,32 @@ class CategoryService extends Service
         return $this->model->id;
     }
 
+    public function delete($id)
+    {
+        $results = false;
+        if ($this->_checkDelete($id)) {
+            $results = (bool) $this->normalDelete($this->_model, $id);
+        }
+
+        return $results;
+    }
+
     public function getForm()
     {
         $category = $this->_model::whereIn('level', [1, 2])->get()->toArray();
-        $results['data'] = TreeHelper::unlimitedForLevel($category, '---');
+        $results['data'] = TreeHelper::unlimitedForLevel($category, '━━━');
 
         return $results;
+    }
+
+    /**
+     * 检查当前分类是否可以删除，没有子分类才能删除
+     *
+     * @param $id
+     * @return bool
+     */
+    private function _checkDelete($id)
+    {
+        return ! (bool) $this->_model->where('parent_id', $id)->first();
     }
 }

@@ -29,4 +29,13 @@ class CategoryController extends Controller
 
         return $results;
     }
+
+    public function destroy(Request $request, CategoryService $service)
+    {
+        $results = ['status' => false];
+        $id = $request->category;
+        $results['status'] = $service->delete($id);
+
+        return $results;
+    }
 }

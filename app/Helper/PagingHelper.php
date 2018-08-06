@@ -2,7 +2,8 @@
 
 namespace App\Helper;
 
-use Illuminate\Pagination\Paginator;
+
+use JasonGrimes\Paginator;
 
 class PagingHelper
 {
@@ -13,7 +14,7 @@ class PagingHelper
      * @param integer       $maxPageShow        最大显示页数
      * @return Paginator    $paginator
      */
-    public static function pageInit($total, $pageNumber, $currentPageField = 'page', $maxPageShow = 11)
+    public static function pageInit($total, $pageNumber, $currentPageField = 'page', $maxPageShow = 7)
     {
         $currentPage = request()->get($currentPageField, 1);
         $requestUri = request()->getRequestUri();

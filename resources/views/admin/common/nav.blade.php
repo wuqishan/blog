@@ -24,6 +24,7 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item" data-nav="admin::family.index" href="{{ route('admin::family.index') }}"><i class="icon fa fa-circle-o"></i> 成员列表</a></li>
                 <li><a class="treeview-item" data-nav="admin::category.index" href="{{ route('admin::category.index') }}"><i class="icon fa fa-circle-o"></i> 分类管理</a></li>
+                <li><a class="treeview-item" data-nav="admin::article.index" href="{{ route('admin::article.index') }}"><i class="icon fa fa-circle-o"></i> 文章管理</a></li>
             </ul>
         </li>
 

@@ -21,7 +21,7 @@ class CreateTableComments extends Migration
             $table->string('title', 128)->comment('评论title');
             $table->text('content');
             $table->integer('object_id')->comment('评论对象的ID主键');
-            $table->tinyInteger('show')->comment('是否显示,0:隐藏,1:显示');
+            $table->tinyInteger('show')->comment('是否显示,1:显示;2:隐藏');
             $table->timestamps();
         });
     }

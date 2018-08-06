@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Model\Comment;
+use App\Helper\TreeHelper;
+use App\Model\Article;
 
-class CommentService extends Service
+class ArticleService extends Service
 {
 
     public $_model = null;
@@ -46,7 +47,7 @@ class CommentService extends Service
     {
         parent::__construct();
 
-        $this->_model = new Comment();
+        $this->_model = new Article();
     }
 
     public function getList()
@@ -85,6 +86,14 @@ class CommentService extends Service
         return $model->id;
     }
 
+    public function getForm()
+    {
+        $categoryService = new CategoryService();
+        $category = $categoryService->_model::all()->toArray();
+        $results['category'] = TreeHelper::unlimitedForLevel($category, '━━━');
+
+        return $results;
+    }
 
     private function listWhere($model)
     {

@@ -18,5 +18,10 @@ return [
     'admin::comment.index' => [
         'admin::comment.index'
     ],
+    'admin::article.index' => [
+        'admin::article.index',
+        'admin::article.create',
+        'admin::article.edit'
+    ],
     //
 ];

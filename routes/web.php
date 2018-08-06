@@ -25,8 +25,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
     Route::get('upload/delete/{id}', 'UploadController@delete')->name('upload.delete');
 
     Route::resource('family', 'FamilyController');
+
+    // 分类
     Route::resource('category', 'CategoryController');
 
+    // 文章
+    Route::resource('article', 'ArticleController');
+
+    // 评论
     Route::get('comment', 'CommentController@index')->name('comment.index');
     Route::post('comment/change_show/{id}', 'CommentController@changeShow')->name('comment.change.show');
 });

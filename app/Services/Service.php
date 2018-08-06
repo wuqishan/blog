@@ -9,12 +9,10 @@ class Service
     public $_length;
     public $_page;
     public $_offset;
-    public $_page_number;
 
     public function __construct()
     {
-        $this->_length = request()->get('length', 10);
-        $this->_page_number = request()->get('page_number', 15);
+        $this->_length = request()->get('length', 6);
         $this->_page = request()->get('page', 1);
         $this->_offset = ($this->_page - 1) * $this->_length;
     }

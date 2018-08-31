@@ -23,5 +23,20 @@ return [
         'admin::article.create',
         'admin::article.edit'
     ],
+    'admin::goods.index' => [
+        'admin::goods.index',
+        'admin::goods.create',
+        'admin::goods.edit'
+    ],
+    'admin::goods_import.index' => [
+        'admin::goods_import.index',
+        'admin::goods_import.create',
+        'admin::goods_import.edit'
+    ],
+    'admin::goods_export.index' => [
+        'admin::goods_export.index',
+        'admin::goods_export.create',
+        'admin::goods_export.edit'
+    ],
     //
 ];

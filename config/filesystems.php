@@ -50,8 +50,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => base_path('public/storage'),
-            'url' => '/storage/',
+            'root' => base_path('public/storage') . '/' . date('Ymd'),
+            'url' => '/storage/' . date('Ymd') . '/',
             'visibility' => 'public',
         ],
 

@@ -18,11 +18,14 @@
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-laptop"></i>
-                <span class="app-menu__label">文章管理</span>
+                <span class="app-menu__label">商品管理</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" data-nav="admin::family.index" href="{{ route('admin::family.index') }}"><i class="icon fa fa-circle-o"></i> 成员列表</a></li>
+                <li><a class="treeview-item" data-nav="admin::goods.index" href="{{ route('admin::goods.index') }}"><i class="icon fa fa-circle-o"></i> 商品列表</a></li>
+                <li><a class="treeview-item" data-nav="admin::goods_import.index" href="{{ route('admin::goods_import.index') }}"><i class="icon fa fa-circle-o"></i> 进库列表</a></li>
+                <li><a class="treeview-item" data-nav="admin::goods_export.index" href="{{ route('admin::goods_export.index') }}"><i class="icon fa fa-circle-o"></i> 出库列表</a></li>
+                <li><a class="treeview-item" data-nav="admin::family.index" href="{{ route('admin::family.index') }}"><i class="icon fa fa-circle-o"></i> 商品列表</a></li>
                 <li><a class="treeview-item" data-nav="admin::category.index" href="{{ route('admin::category.index') }}"><i class="icon fa fa-circle-o"></i> 分类管理</a></li>
                 <li><a class="treeview-item" data-nav="admin::article.index" href="{{ route('admin::article.index') }}"><i class="icon fa fa-circle-o"></i> 文章管理</a></li>
             </ul>

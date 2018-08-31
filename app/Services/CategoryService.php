@@ -7,7 +7,6 @@ use App\Model\Category;
 
 class CategoryService extends Service
 {
-
     public $_model = null;
 
     /**

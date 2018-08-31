@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UploadService extends Service
 {
-    public function storePhoto()
+    public function commonUpload($name)
     {
         $results = [
             'status' => false,
             'data' => ['filename' => '', 'origin_name' => '', 'filepath' => '']
         ];
         // 文件是否上传成功
-        if (request()->hasFile('photo')) {
-            $file = request()->file('photo');
+        if (request()->hasFile($name)) {
+            $file = request()->file($name);
             if ($file->isValid()) {
                 $results['data']['origin_name'] = $file->getClientOriginalName(); // 文件原名
                 $results['data']['filename'] = md5($results['data']['origin_name'] . date('YmdHis')) . '.' . $file->getClientOriginalExtension();

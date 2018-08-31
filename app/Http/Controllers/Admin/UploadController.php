@@ -9,9 +9,19 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
-    public function photo(UploadService $service, TempFilesService $filesService)
+    /**
+     * 文件上传
+     *      name  =>  $_FILES 里面键
+     *      store =>  是否存入零时表
+     * @param Request $request
+     * @param UploadService $service
+     * @param TempFilesService $filesService
+     * @return array
+     */
+    public function upload(Request $request, UploadService $service, TempFilesService $filesService)
     {
-        $results = $service->storePhoto();
+        $name = $request->get('name', 'file');
+        $results = $service->commonUpload($name);
         $results['data']['id'] = $filesService->storeTempFiles($results);
 
         return $results;

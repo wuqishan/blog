@@ -35,4 +35,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
     // 评论
     Route::get('comment', 'CommentController@index')->name('comment.index');
     Route::post('comment/change_show/{id}', 'CommentController@changeShow')->name('comment.change.show');
+
+    // 商品
+    Route::resource('goods', 'GoodsController', [
+        'parameters' => ['goods' => 'goods_id']
+    ]);
+
+    Route::resource('goods_import', 'GoodsImportController');
+    Route::resource('goods_export', 'GoodsExportController');
+
+    // 上传
+    Route::post('upload', 'UploadController@upload')->name('upload');
 });

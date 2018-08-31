@@ -9,6 +9,7 @@ class Service
     public $_length;
     public $_page;
     public $_offset;
+    public $_model = null;
 
     public function __construct()
     {
@@ -20,27 +21,33 @@ class Service
     /**
      * 一般的数据保存和更新
      *
-     * @param $model
-     * @param $prev_formatter
-     * @param $process_field
      * @param $params
+     * @param integer $id
      * @return mixed
      */
-    public function normalSaveData($model, $prev_formatter, $process_field, $params)
+    public function normalSaveData($params, $id = 0)
     {
-        // 先做保存前的处理
-        $class = PrevSaveFormatterHelper::class;
-        foreach ($prev_formatter as $v) {
-            $func = $v['func'];
-            $key = $v['key'];
-            $params = call_user_func("$class::$func", $params, $key);
+        $results = 0;
+        if ($this->_model !== null) {
+            $methods = get_class_methods($this->_model);
+            if(in_array('filterFields',$methods)) {
+                $params = $this->_model->filterFields($params, $id);
+            };
+            if ($id !== 0) {
+                $record = $this->_model::find($id);
+                if (! empty($record)) {
+                    foreach ($params as $k => $v) {
+                        $record->{$k} = $v;
+                    }
+                    $record->save();
+                    $results = $record->id;
+                }
+            } else {
+                $results = $this->_model::insertGetId($params);
+            }
         }
 
-        foreach ($process_field as $v) {
-            $model->$v = $params[$v];
-        }
-
-        return $model;
+        return $results;
     }
 
     /**

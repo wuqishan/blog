@@ -11,14 +11,15 @@ $.extend({
     sys_upload_img: function (option)
     {
         let optionDefault = {
-            'inputName': 'file',                // file 表单元素的name名称，同时会赋值该值的id
+            'inputName': 'upload_file',         // file 表单元素的name名称，同时会赋值该值的id
             'url': '',                          // 提交到url
             'formData': {},                     // 附带提交参数
             'multiple': false,                  // 是否是多图片传
             'defaultImg': '',                   // 显示点击上传的图片
             'uploadAreaObj': '#upload_area',    // 表单元素的位置，一般为 form-group col-md-12
             'label': '图片',                     // 提示词
-            'hiddenName': 'temp_file'            // 存放数据的隐藏表单控件名字
+            'hiddenName': 'temp_file',           // 存放数据的隐藏表单控件名字
+            'initInfo': []
         };
         let settings = $.extend(optionDefault, option);
 
@@ -31,8 +32,38 @@ $.extend({
             'hiddenName': settings.hiddenName,
             'multiple': settings.multiple ? 'multiple' : ''
         };
+        settings.formData.name = settings.inputName;
         $.sys_upload_img_template(templateOptions);
 
+        let htmlTemplate = '<div class="upload-img-box upload-img-show" id="upload-img-show-{{id}}">' +
+            '                   <img src="{{src}}">' +
+            '                   <a href="javascript:void(0);" onclick="$.sys_del_upload_img({{id}}, \''+ settings.hiddenName +'\')" title="删除">×</a>' +
+            '               </div>';
+
+        // 执行初始化函数
+        if (typeof settings.init === "function") {
+            settings.callback(data.result);
+        }
+
+        if (settings.initInfo.length > 0) {
+            let hiddenValue = [];
+            let initImage = [];
+
+            for (var i = 0; i < settings.initInfo.length; i++) {
+                hiddenValue.push(settings.initInfo[i].id);
+                initImage.push(
+                    htmlTemplate.replace('{{id}}', settings.initInfo[i].id)
+                        .replace('{{id}}', settings.initInfo[i].id)
+                        .replace('{{src}}', settings.initInfo[i].filepath + settings.initInfo[i].filename)
+                )
+            }
+            if (hiddenValue.length > 0 && initImage.length > 0) {
+                $('input[name="'+ settings.hiddenName +'"]').val(hiddenValue.join(','));
+                $('#file-input-position-control').before(initImage.join(''));
+            }
+        }
+
+        // 定义上传事件
         $("#" + settings.inputName).fileupload({
             url: settings.url,
             dataType: 'json',
@@ -44,11 +75,6 @@ $.extend({
                 $('.upload-progress').show();
             },
             done: function (e, data) {
-
-                let htmlTemplate = '<div class="upload-img-box upload-img-show" id="upload-img-show-{{id}}">' +
-                    '                   <img src="{{src}}">' +
-                    '                   <a href="javascript:void(0);" onclick="$.sys_del_upload_img({{id}}, \''+ settings.hiddenName +'\')" title="删除">×</a>' +
-                    '               </div>';
                 let html = '';
                 if (data.result.status) {
                     if (settings.multiple) {

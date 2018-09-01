@@ -11,12 +11,12 @@ class GoodsRequest extends FormRequest
         'admin::goods.store' => [
             'title' => 'required',
             'unit' => 'required',
-            'images' => 'required',
+            'image_id' => 'required',
         ],
         'admin::goods.update' => [
             'title' => 'required',
             'unit' => 'required',
-            'images' => 'required'
+            'image_id' => 'required'
         ]
     ];
 

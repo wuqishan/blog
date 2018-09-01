@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\TempFilesService;
+use App\Services\FilesService;
 use App\Services\UploadService;
 use Illuminate\Http\Request;
 
@@ -15,19 +15,26 @@ class UploadController extends Controller
      *      store =>  是否存入零时表
      * @param Request $request
      * @param UploadService $service
-     * @param TempFilesService $filesService
+     * @param FilesService $filesService
      * @return array
      */
-    public function upload(Request $request, UploadService $service, TempFilesService $filesService)
+    public function upload(Request $request, UploadService $service, FilesService $filesService)
     {
-        $name = $request->get('name', 'file');
+        $name = $request->get('name', 'upload_file');
         $results = $service->commonUpload($name);
-        $results['data']['id'] = $filesService->storeTempFiles($results);
+        $results['data']['id'] = $filesService->storeFiles($results);
 
         return $results;
     }
 
-    public function delete(Request $request, TempFilesService $service)
+    /**
+     * 附件删除
+     *
+     * @param Request $request
+     * @param FilesService $service
+     * @return array
+     */
+    public function delete(Request $request, FilesService $service)
     {
         $results = ['status' => false];
         $id = (int) $request->id;

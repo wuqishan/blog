@@ -69,13 +69,12 @@
     <script type="text/javascript">
         $(function () {
             var option = {
-                'inputName': 'photo',
                 'url': '{{ route("admin::upload") }}',
                 'defaultImg': "{{ asset('/static/admin/images/upload.png') }}",
                 'uploadAreaObj': $('.upload_area'),
                 'formData': {'_token': '{{ csrf_token() }}', 'name': 'photo'},
                 'multiple': true,
-                'hiddenName': 'images',
+                'hiddenName': 'image_id',
                 'callback': function (results) {
                     // 回调函数处理
                     let images = $('input[name="goods_images"]').val();

@@ -7,8 +7,9 @@ use App\Model\Goods;
 class GoodsService extends Service
 {
 
+    const IMAGE_TYPE = 1;
+
     public $_model = null;
-    private $_results = [];
 
     /**
      * 初始化
@@ -26,56 +27,65 @@ class GoodsService extends Service
      */
     public function getList()
     {
-        $this->_results['length'] = $this->_length;
-        $this->_results['list'] = [];
+        $results = parent::getList();
 
-        $this->_model = $this->listWhere($this->_model)
-                    ->offset($this->_offset)
-                    ->orderBy('id', 'desc')
-                    ->limit($this->_length);
-
-        $dataModel = $this->_model->get();
-        $this->_results['total'] = $this->_model->count();
-
-        if (! empty($dataModel)) {
-            $this->_results['list'] = $dataModel->toArray();
-        }
-
-        return $this->_results;
+        return $results;
     }
 
+    /**
+     * 详细页获取信息
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getDetail($id)
     {
-        $results = $this->_model->find($id)->toArray();
+        $images = (new FilesService())->getFilesByObjectAndType($id, self::IMAGE_TYPE);
+        $results = parent::getDetail($id);
+        $results['images'] = $images;
 
         return $results;
     }
 
 
-    public function getForm()
+    public function saveData($params, $id = 0)
     {
-        $categoryService = new CategoryService();
-        $category = $categoryService->_model::all()->toArray();
-        $results['category'] = TreeHelper::unlimitedForLevel($category, '━━━');
+        $goods_id = parent::saveData($params, $id);
 
-        return $results;
-    }
-
-    public function normalSaveData($params, $id = 0)
-    {
-        $imageUrl = [];
-        if (isset($params['images'])) {
-            $tempFilesService = new TempFilesService();
-            $imageUrl = $tempFilesService->getUrl($params['images']);
+        // 更新图片信息
+        if (isset($params['image_id'])) {
+            $filesService = new FilesService();
+            $filesService->updateType($params['image_id'], $goods_id, self::IMAGE_TYPE);
         }
-        $params['images'] = implode(',', $imageUrl);
 
-        return parent::normalSaveData($params, $id);
+        return $goods_id;
     }
 
-    private function listWhere()
+    /**
+     * 删除数据
+     *
+     * @param $id
+     * @param bool $flag
+     * @return bool
+     */
+    public function delete($id, $flag = false)
+    {
+        $results = parent::delete($id, $flag);
+
+        return $results;
+    }
+
+    /**
+     * 获取搜索条件
+     *
+     * @return Goods|null
+     */
+    public function listWhere()
     {
         $filter = $this->filterSearchParams();
+
+        // 处理条件
+        $this->_model = $this->_model->where('deleted', 1);
         if (isset($filter['keyword']) && ! empty($filter['keyword'])) {
             $keyword = $filter['keyword'];
             $this->_model = $this->_model->where(function ($query) use ($keyword) {
@@ -87,6 +97,14 @@ class GoodsService extends Service
             $this->_model = $this->_model->where('status', $filter['status']);
         }
 
+        // 处理排序
+        if (
+            isset($filter['sort_field']) && ! empty($filter['sort_field']) &&
+            isset($filter['sort_type']) && ! empty($filter['sort_type'])
+        ) {
+            $this->_model = $this->_model->orderBy($filter['sort_field'], $filter['sort_type']);
+        }
+
         return $this->_model;
     }
 
@@ -95,10 +113,12 @@ class GoodsService extends Service
      *
      * @return array
      */
-    private function filterSearchParams()
+    public function filterSearchParams()
     {
         $params['keyword'] = strip_tags(request()->get('keyword'));
         $params['status'] = intval(request()->get('status'));
+        $params['sort_field'] = strip_tags(request()->get('sort_field', 'id'));
+        $params['sort_type'] = strip_tags(request()->get('sort_type', 'desc'));
 
         return array_filter($params);
     }

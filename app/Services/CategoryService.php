@@ -10,46 +10,6 @@ class CategoryService extends Service
     public $_model = null;
 
     /**
-     * 哪些字段需要保存
-     *
-     * @var array
-     */
-    public $_save_field = [
-        'title', 'parent_id', 'order', 'level', 'description'
-    ];
-
-    /**
-     * 哪些字段需要更新
-     */
-    public $_update_field = [
-        'title', 'order', 'description'
-    ];
-
-    /**
-     * 保存前的处理
-     *
-     * @var array
-     */
-    public $_prev_save_formatter = [
-        ['key' => 'title', 'func' => 'stripTags'],
-        ['key' => 'parent_id', 'func' => 'int'],
-        ['key' => 'order', 'func' => 'int'],
-        ['key' => 'level', 'func' => 'int'],
-        ['key' => 'description', 'func' => 'stripTags'],
-    ];
-
-    /**
-     * 更新前的处理
-     *
-     * @var array
-     */
-    public $_prev_update_formatter = [
-        ['key' => 'title', 'func' => 'stripTags'],
-        ['key' => 'order', 'func' => 'int'],
-        ['key' => 'description', 'func' => 'stripTags'],
-    ];
-
-    /**
      * 初始化
      */
     public function __construct()
@@ -61,41 +21,36 @@ class CategoryService extends Service
 
     public function getList()
     {
-        $category = $this->_model::orderBy('order', 'asc')->get()->toArray();
-        $results['data'] = TreeHelper::unlimitedForLevel($category, '━━━');
+        $results = parent::getList();
+        $results['list'] = TreeHelper::unlimitedForLevel($results['list'], '━━━');
 
         return $results;
     }
 
-    public function saveData($params)
+    /**
+     * @param $params
+     * @param int $id
+     * @return mixed
+     */
+    public function saveData($params, $id = 0)
     {
-        $model = $this->normalSaveData($this->_model, $this->_prev_save_formatter, $this->_save_field, $params);
-        $model->save();
+        $results = parent::saveData( $params, $id);
 
-        return $model->id;
-    }
-
-    public function updateData($id, $params)
-    {
-        $mode = $this->_model->find($id);
-        $model = $this->normalSaveData($mode, $this->_prev_update_formatter, $this->_update_field, $params);
-        $model->save();
-
-        return $model->id;
+        return $results;
     }
 
     public function getDetail($id)
     {
-        $results = $this->_model->find($id)->toArray();
+        $results = parent::getDetail($id);
 
         return $results;
     }
 
-    public function delete($id)
+    public function delete($id, $flag)
     {
         $results = false;
         if ($this->_checkDelete($id)) {
-            $results = (bool) $this->normalDelete($this->_model, $id);
+            $results = (bool) parent::delete($id, $flag);
         }
 
         return $results;
@@ -103,8 +58,8 @@ class CategoryService extends Service
 
     public function getForm()
     {
-        $category = $this->_model::whereIn('level', [1, 2])->get()->toArray();
-        $results['data'] = TreeHelper::unlimitedForLevel($category, '━━━');
+        $category = $this->_model->whereIn('level', [1, 2])->get()->toArray();
+        $results['parent'] = TreeHelper::unlimitedForLevel($category, '━━━');
 
         return $results;
     }
@@ -118,5 +73,38 @@ class CategoryService extends Service
     private function _checkDelete($id)
     {
         return ! (bool) $this->_model->where('parent_id', $id)->first();
+    }
+
+    /**
+     * 获取搜索条件
+     *
+     * @return Category|null
+     */
+    public function listWhere()
+    {
+        $filter = $this->filterSearchParams();
+
+        // 处理排序
+        if (
+            isset($filter['sort_field']) && ! empty($filter['sort_field']) &&
+            isset($filter['sort_type']) && ! empty($filter['sort_type'])
+        ) {
+            $this->_model = $this->_model->orderBy($filter['sort_field'], $filter['sort_type']);
+        }
+
+        return $this->_model;
+    }
+
+    /**
+     * 获取list页面搜索结果的参数过滤
+     *
+     * @return array
+     */
+    public function filterSearchParams()
+    {
+        $params['sort_field'] = strip_tags(request()->get('sort_field', 'id'));
+        $params['sort_type'] = strip_tags(request()->get('sort_type', 'desc'));
+
+        return array_filter($params);
     }
 }

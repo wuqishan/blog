@@ -25,7 +25,6 @@
                         <form id="form-data" class="row">
                             {{ csrf_field() }}
                             {{ method_field('put') }}
-                            <input type="hidden" name="level" value="1">
                             <div class="form-group col-md-6">
                                 <label>分类名称 :</label>
                                 <input class="form-control" value="{{ $results['detail']['title'] }}" type="text" name="title" placeholder="请输入">
@@ -33,8 +32,11 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>父级分类 :</label>
-                                <select class="form-control" name="parent_id" disabled="disabled">
-                                    <option value="0" level="1">━━━ 禁止修改</option>
+                                <select class="form-control" disabled="disabled">
+                                    <option>━━━ 顶级分类</option>
+                                    @foreach($results['form']['parent'] as $v)
+                                        <option @if($results['detail']['parent_id'] == $v['id']) selected @endif>━━━━━━{{ $v['html'] }} {{ $v['title'] }}</option>
+                                    @endforeach
                                 </select>
                                 <div class="form-control-feedback"></div>
                             </div>
@@ -68,15 +70,11 @@
         $(function () {
             var sub_opt = {
                 'formSelector': '#form-data',
-                'url': '{{ route("admin::category.update", ['category' => request()->category]) }}',
+                'url': '{{ route("admin::category.update", ['category_id' => request()->category_id]) }}',
                 'goTo': '{{ route('admin::category.index') }}'
             };
             $('.submit').click(function () {
                 $.sys_submit(sub_opt);
-            });
-            $('#form-data select[name=parent_id]').change(function(){
-                var level = $(this).find('option:selected').attr('level');
-                $('#form-data input[name=level]').val(level);
             });
         });
     </script>

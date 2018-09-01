@@ -9,14 +9,22 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request, CategoryService $service)
+    /**
+     * @param CategoryService $service
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(CategoryService $service)
     {
-        $results['list'] = $service->getList();
+        $results['data'] = $service->getList();
 
         return view('admin.category.index', ['results' => $results]);
     }
 
-    public function create(Request $request, CategoryService $service)
+    /**
+     * @param CategoryService $service
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create(CategoryService $service)
     {
         $results['form'] = $service->getForm();
         return view('admin.category.create', ['results' => $results]);
@@ -32,26 +40,24 @@ class CategoryController extends Controller
 
     public function edit(Request $request, CategoryService $service)
     {
-        $id = $request->category;
-        $results['detail'] = $service->getDetail($id);
+        $results['detail'] = $service->getDetail($request->category_id);
+        $results['form'] = $service->getForm();
 
         return view('admin.category.edit', ['results' => $results]);
     }
 
     public function update(CategoryRequest $request, CategoryService $service)
     {
-        $results = ['status' => false];
-        $id = $request->category;
-        $results['status'] = (bool) $service->updateData($id, $request->all());
+        $params = $request->all();
+        $results['status'] = (bool) $service->saveData($params, $request->category_id);
 
         return $results;
     }
 
+
     public function destroy(Request $request, CategoryService $service)
     {
-        $results = ['status' => false];
-        $id = $request->category;
-        $results['status'] = $service->delete($id);
+        $results['status'] = $service->delete($request->category_id, true);
 
         return $results;
     }

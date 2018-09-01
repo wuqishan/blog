@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Route;
 class CategoryRequest extends FormRequest
 {
     public $rules = [
-        'category.store' => [
+        'admin::category.store' => [
             'title' => 'required',
             'order' => 'required|integer',
             'parent_id' => 'required|integer',
         ],
-        'category.update' => [
+        'admin::category.update' => [
             'title' => 'required',
             'order' => 'required|integer'
         ]

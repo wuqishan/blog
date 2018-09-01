@@ -17,7 +17,7 @@ class UploadService extends Service
             $file = request()->file($name);
             if ($file->isValid()) {
                 $results['data']['origin_name'] = $file->getClientOriginalName(); // 文件原名
-                $results['data']['filename'] = md5($results['data']['origin_name'] . date('YmdHis')) . '.' . $file->getClientOriginalExtension();
+                $results['data']['filename'] = md5($results['data']['origin_name'] . rand(1, 100000)) . date('His') . '.' . $file->getClientOriginalExtension();
                 $results['data']['filepath'] = config('filesystems.disks.public.url');
                 $realPath = $file->getRealPath();   //临时文件的绝对路径
                 $results['status'] = Storage::disk('public')->put($results['data']['filename'],file_get_contents($realPath));

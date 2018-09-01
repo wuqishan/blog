@@ -25,6 +25,7 @@
                         <form id="form-data" class="row">
                             {{ csrf_field() }}
                             <input type="hidden" name="level" value="1">
+
                             <div class="form-group col-md-6">
                                 <label>分类名称 :</label>
                                 <input class="form-control" type="text" name="title" placeholder="请输入">
@@ -34,7 +35,7 @@
                                 <label>父级分类 :</label>
                                 <select class="form-control" name="parent_id">
                                     <option value="0" level="1">━━━ 顶级分类</option>
-                                    @foreach($results['form']['data'] as $v)
+                                    @foreach($results['form']['parent'] as $v)
                                         <option value="{{ $v['id'] }}" level="{{ $v['level'] + 1 }}">━━━━━━{{ $v['html'] }} {{ $v['title'] }}</option>
                                     @endforeach
                                 </select>

@@ -46,7 +46,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($results['list']['data'] as $v)
+                                @foreach($results['data']['list'] as $v)
                                     <tr class="parent_{{ $v['parent_id'] }}">
                                         <td>┏━━━{{ $v['html'] }} {{ $v['title'] }}</td>
                                         <td>{{ $v['level'] }}</td>

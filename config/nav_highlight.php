@@ -6,22 +6,10 @@
  */
 
 return [
-    'admin::family.index' => [
-        'admin::family.index',
-        'admin::family.create'
-    ],
     'admin::category.index' => [
         'admin::category.index',
         'admin::category.edit',
         'admin::category.create'
-    ],
-    'admin::comment.index' => [
-        'admin::comment.index'
-    ],
-    'admin::article.index' => [
-        'admin::article.index',
-        'admin::article.create',
-        'admin::article.edit'
     ],
     'admin::goods.index' => [
         'admin::goods.index',

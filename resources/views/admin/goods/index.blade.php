@@ -28,8 +28,8 @@
                             <div class="form-group col-md-2">
                                 <select class="form-control" name="status">
                                     <option value="">选择状态</option>
-                                    <option @if(request()->get('deleted') == 1) selected @endif value="1">上架</option>
-                                    <option @if(request()->get('deleted') == 2) selected @endif value="2">下架</option>
+                                    <option @if(request()->get('status') == 1) selected @endif value="1">上架</option>
+                                    <option @if(request()->get('status') == 2) selected @endif value="2">下架</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-5"></div>
@@ -79,6 +79,7 @@
                             </tbody>
                         </table>
                     </div>
+                    @include('admin.common.paging')
                 </div>
             </div>
         </div>
@@ -94,17 +95,15 @@
                 btn: ['确定','取消']
             }, function() {
                 $.ajax({
-                    'url': "/admin/category/" + id,
+                    'url': "/admin/goods/" + id,
                     'type': 'post',
                     'data': {'_method': 'DELETE', '_token': '{{ csrf_token() }}'},
                     'dataType': 'json',
                     'success': function (results) {
                         if (results.status) {
                             layer.msg('删除成功！', {'anim': -1, 'time': 4,}, function () {
-                                location.href = '{{ route('admin::category.index') }}'
+                                location.href = '{{ route('admin::goods.index') }}'
                             });
-                        } else {
-                            layer.msg('只能从最低层分类开始删除！');
                         }
                     }
                 });

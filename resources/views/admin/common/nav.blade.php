@@ -25,9 +25,7 @@
                 <li><a class="treeview-item" data-nav="admin::goods.index" href="{{ route('admin::goods.index') }}"><i class="icon fa fa-circle-o"></i> 商品列表</a></li>
                 <li><a class="treeview-item" data-nav="admin::goods_import.index" href="{{ route('admin::goods_import.index') }}"><i class="icon fa fa-circle-o"></i> 进库列表</a></li>
                 <li><a class="treeview-item" data-nav="admin::goods_export.index" href="{{ route('admin::goods_export.index') }}"><i class="icon fa fa-circle-o"></i> 出库列表</a></li>
-                <li><a class="treeview-item" data-nav="admin::family.index" href="{{ route('admin::family.index') }}"><i class="icon fa fa-circle-o"></i> 商品列表</a></li>
                 <li><a class="treeview-item" data-nav="admin::category.index" href="{{ route('admin::category.index') }}"><i class="icon fa fa-circle-o"></i> 分类管理</a></li>
-                <li><a class="treeview-item" data-nav="admin::article.index" href="{{ route('admin::article.index') }}"><i class="icon fa fa-circle-o"></i> 文章管理</a></li>
             </ul>
         </li>
 
@@ -45,7 +43,7 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" data-nav="admin::comment.index" href="{{ route('admin::comment.index') }}"><i class="icon fa fa-circle-o"></i>评论管理</a></li>
+                <li><a class="treeview-item" data-nav="admin::comment.index" href="#"><i class="icon fa fa-circle-o"></i>评论管理</a></li>
             </ul>
         </li>
 

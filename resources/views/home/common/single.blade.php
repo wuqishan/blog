@@ -8,7 +8,7 @@
                     <div class="blog-left">
                         <div class="single-left-left wow fadeInRight animated animated" data-wow-delay=".5s">
                             <p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on Mar 2, 2016 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
-                            <img src="{{ asset('/static/images/b1.jpg') }}" alt="" />
+                            <img src="{{ asset('/static/images/huo1.jpg') }}" alt="" />
                         </div>
                         <div class="blog-left-bottom wow fadeInRight animated animated" data-wow-delay=".5s">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin
@@ -34,7 +34,7 @@
                         <div class="media response-info">
                             <div class="media-left response-text-left wow fadeInRight animated animated" data-wow-delay=".5s">
                                 <a href="#">
-                                    <img class="media-object" src="{{ asset('/static/images/t1.jpg') }}" alt="">
+                                    <img class="media-object" src="{{ asset('/static/images/huo2.jpg') }}" alt="">
                                 </a>
                                 <h5><a href="#">Admin</a></h5>
                             </div>
@@ -48,7 +48,7 @@
                                 <div class="media response-info">
                                     <div class="media-left response-text-left wow fadeInRight animated animated" data-wow-delay=".5s">
                                         <a href="#">
-                                            <img class="media-object" src="{{ asset('/static/images/t2.jpg') }}" alt="">
+                                            <img class="media-object" src="{{ asset('/static/images/huo3.jpg') }}" alt="">
                                         </a>
                                         <h5><a href="#">Admin</a></h5>
                                     </div>
@@ -68,7 +68,7 @@
                         <div class="media response-info">
                             <div class="media-left response-text-left wow fadeInRight animated animated" data-wow-delay=".5s">
                                 <a href="#">
-                                    <img class="media-object" src="{{ asset('/static/images/t3.jpg') }}" alt="">
+                                    <img class="media-object" src="{{ asset('/static/images/huo4.jpg') }}" alt="">
                                 </a>
                                 <h5><a href="#">Admin</a></h5>
                             </div>

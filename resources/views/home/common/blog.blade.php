@@ -11,7 +11,7 @@
                     <div class="blog-left">
                         <div class="blog-left-left wow fadeInRight animated animated" data-wow-delay=".5s">
                             <p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on June 2, 2016 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
-                            <a href="single.html"><img src="{{ asset('/static/images/b1.jpg') }}" alt="" /></a>
+                            <a href="single.html"><img src="{{ asset('/static/images/huo4.jpg') }}" alt="" /></a>
                         </div>
                         <div class="blog-left-right wow fadeInRight animated animated" data-wow-delay=".5s">
                             <a href="single.html">Phasellus ultrices tellus eget ipsum ornare molestie </a>
@@ -26,7 +26,7 @@
                     <div class="blog-left">
                         <div class="blog-left-left wow fadeInRight animated animated" data-wow-delay=".5s">
                             <p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on June 2, 2016 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
-                            <a href="single.html"><img src="{{ asset('/static/images/b2.jpg') }}" alt="" /></a>
+                            <a href="single.html"><img src="{{ asset('/static/images/huo1.jpg') }}" alt="" /></a>
                         </div>
                         <div class="blog-left-right wow fadeInRight animated animated" data-wow-delay=".5s">
                             <a href="single.html">Phasellus ultrices tellus eget ipsum ornare molestie</a>
@@ -41,7 +41,7 @@
                     <div class="blog-left">
                         <div class="blog-left-left wow fadeInRight animated animated" data-wow-delay=".5s">
                             <p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on June 2, 2016 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
-                            <a href="single.html"><img src="{{ asset('/static/images/b3.jpg') }}" alt="" /></a>
+                            <a href="single.html"><img src="{{ asset('/static/images/huo2.jpg') }}" alt="" /></a>
                         </div>
                         <div class="blog-left-right wow fadeInRight animated animated" data-wow-delay=".5s">
                             <a href="single.html">Phasellus ultrices tellus eget ipsum ornare molestie</a>
@@ -105,7 +105,7 @@
                     <h3 class="wow fadeInLeft animated animated" data-wow-delay=".5s">Recent Comments</h3>
                     <div class="comments-text wow fadeInLeft animated animated" data-wow-delay=".5s">
                         <div class="col-md-3 comments-left">
-                            <img src="{{ asset('/static/images/t1.jpg') }}" alt="" />
+                            <img src="{{ asset('/static/images/huo3.jpg') }}" alt="" />
                         </div>
                         <div class="col-md-9 comments-right">
                             <h5>Admin</h5>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="comments-text wow fadeInLeft animated animated" data-wow-delay=".5s">
                         <div class="col-md-3 comments-left">
-                            <img src="{{ asset('/static/images/t2.jpg') }}" alt="" />
+                            <img src="{{ asset('/static/images/huo4.jpg') }}" alt="" />
                         </div>
                         <div class="col-md-9 comments-right">
                             <h5>Admin</h5>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="comments-text wow fadeInLeft animated animated" data-wow-delay=".5s">
                         <div class="col-md-3 comments-left">
-                            <img src="{{ asset('/static/images/t3.jpg') }}" alt="" />
+                            <img src="{{ asset('/static/images/huo5.jpg') }}" alt="" />
                         </div>
                         <div class="col-md-9 comments-right">
                             <h5>Admin</h5>

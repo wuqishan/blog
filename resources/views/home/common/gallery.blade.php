@@ -6,7 +6,7 @@
             <div class="col-md-4 grid slideanim wow fadeInLeft animated animated animated" data-wow-delay=".5s">
                 <figure class="effect-jazz">
                     <a href="#portfolioModal1"  data-toggle="modal">
-                        <img src="/static/images/p1.jpg" alt="img25" class="img-responsive"/>
+                        <img src="/static/images/huo1.jpg" alt="img25" class="img-responsive"/>
                         <figcaption>
                             <h4>Go Easy On</h4>
                             <p> There are many variations of passages of Lorem Ipsum .</p>
@@ -18,7 +18,7 @@
                 <figure class="effect-jazz">
                     <a href="#portfolioModal2"  data-toggle="modal">
 
-                        <img src="/static/images/p2.jpg" alt="img25" class="img-responsive"/>
+                        <img src="/static/images/huo2.jpg" alt="img25" class="img-responsive"/>
                         <figcaption>
                             <h4>Go Easy On</h4>
                             <p> There are many variations of passages of Lorem Ipsum .</p>
@@ -30,7 +30,7 @@
                 <figure class="effect-jazz">
                     <a href="#portfolioModal3"  data-toggle="modal">
 
-                        <img src="/static/images/p3.jpg" alt="img25" class="img-responsive"/>
+                        <img src="/static/images/huo3.jpg" alt="img25" class="img-responsive"/>
                         <figcaption>
                             <h4>Go Easy On</h4>
                             <p> There are many variations of passages of Lorem Ipsum .</p>
@@ -46,7 +46,7 @@
             <figure class="effect-jazz">
                 <a href="#portfolioModal4"  data-toggle="modal">
 
-                    <img src="/static/images/p4.jpg" alt="img25" class="img-responsive"/>
+                    <img src="/static/images/huo4.jpg" alt="img25" class="img-responsive"/>
                     <figcaption>
                         <h4 class="effcet-text">Go Easy On</h4>
                         <p> There are many variations of passages .</p>
@@ -58,7 +58,7 @@
             <figure class="effect-jazz">
                 <a href="#portfolioModal5"  data-toggle="modal">
 
-                    <img src="/static/images/p5.jpg" alt="img25" class="img-responsive"/>
+                    <img src="/static/images/huo5.jpg" alt="img25" class="img-responsive"/>
                     <figcaption>
                         <h4 class="effcet-text">Go Easy On</h4>
                         <p> There are many variations of passages.</p>
@@ -70,7 +70,7 @@
         <figure class="effect-jazz">
             <a href="#portfolioModal6"  data-toggle="modal">
 
-                <img src="/static/images/p6.jpg" alt="img25" class="img-responsive"/>
+                <img src="/static/images/huo6.jpg" alt="img25" class="img-responsive"/>
                 <figcaption>
                     <h4 class="effcet-text">Go Easy On</h4>
                     <p> There are many variations of passages.</p>
@@ -97,7 +97,7 @@
                 <div class="modal-body">
                     <h3>Go Easy On</h3>
 
-                    <img src="/static/images/p1.jpg" class="img-responsive" alt="">
+                    <img src="/static/images/huo7.jpg" class="img-responsive" alt="">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                 <div class="modal-body">
                     <h3>Go Easy On</h3>
 
-                    <img src="/static/images/p2.jpg" class="img-responsive" alt="">
+                    <img src="/static/images/huo8.jpg" class="img-responsive" alt="">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                 <div class="modal-body">
                     <h3>Go Easy On</h3>
 
-                    <img src="/static/images/p3.jpg" class="img-responsive" alt="">
+                    <img src="/static/images/huo9.jpg" class="img-responsive" alt="">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
             </div>
@@ -160,7 +160,7 @@
                 <div class="modal-body">
                     <h3>Go Easy On</h3>
 
-                    <img src="/static/images/p4.jpg" class="img-responsive" alt="">
+                    <img src="/static/images/huo1.jpg" class="img-responsive" alt="">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                 <div class="modal-body">
                     <h3>Go Easy On</h3>
 
-                    <img src="/static/images/p5.jpg" class="img-responsive" alt="">
+                    <img src="/static/images/huo2.jpg" class="img-responsive" alt="">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
             </div>
@@ -202,7 +202,7 @@
                 <div class="modal-body">
                     <h3>Go Easy On</h3>
 
-                    <img src="/static/images/p6.jpg" class="img-responsive" alt="">
+                    <img src="/static/images/huo4.jpg" class="img-responsive" alt="">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </div>
             </div>

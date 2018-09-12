@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/single', 'IndexController@single')->name('single');
 });
 
+/*
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function () {
 
     Route::get('/', 'IndexController@index')->name('admin.index');
@@ -37,12 +38,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
         'parameters' => ['goods' => 'goods_id']
     ]);
 
+    // 导入
     Route::resource('goods_import', 'GoodsImportController', [
         'parameters' => ['goods_import' => 'goods_import_id']
     ]);
+
+    // 导出
     Route::resource('goods_export', 'GoodsExportController', [
         'parameters' => ['goods_export' => 'goods_export_id']
     ]);
 
 
 });
+*/

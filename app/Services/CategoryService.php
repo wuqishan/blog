@@ -21,7 +21,11 @@ class CategoryService extends Service
 
     public function getList()
     {
-        $results = parent::getList();
+        $results['list'] = [];
+        $list = $this->listWhere()->get();
+        if (! empty($list)) {
+            $results['list'] = $list->toArray();
+        }
         $results['list'] = TreeHelper::unlimitedForLevel($results['list'], '━━━');
 
         return $results;
@@ -34,23 +38,46 @@ class CategoryService extends Service
      */
     public function saveData($params, $id = 0)
     {
-        $results = parent::saveData( $params, $id);
+        $id = intval($id);
+        if ($id > 0) {
+            $detail = $this->_model->find($id);
+            if (! empty($detail)) {
+                $detail->title = strip_tags($params['title']);
+                $detail->description = strip_tags($params['description']);
+                $detail->order = intval($params['order']);
+                $detail->level = intval($params['level']);
+                $detail->save();
+            }
+        } else {
+            $data = [
+                'parent_id' => intval($params['parent_id']),
+                'title' => strip_tags($params['title']),
+                'description' => strip_tags($params['description']),
+                'order' => intval($params['order']),
+                'level' => intval($params['level']),
+            ];
+            $id = $this->_model->insertGetId($data);
+        }
 
-        return $results;
+        return $id;
     }
 
     public function getDetail($id)
     {
-        $results = parent::getDetail($id);
+        $results = [];
+        $dataModel = $this->_model->find($id);
+        if (! empty($dataModel)) {
+            $results = $dataModel->toArray();
+        }
 
         return $results;
     }
 
-    public function delete($id, $flag)
+    public function delete($id)
     {
         $results = false;
         if ($this->_checkDelete($id)) {
-            $results = (bool) parent::delete($id, $flag);
+            $results = (bool) $this->_model->destroy($id);
         }
 
         return $results;

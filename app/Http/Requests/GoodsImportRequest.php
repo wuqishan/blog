@@ -5,14 +5,18 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 
-class FamilyRequest extends FormRequest
+class GoodsImportRequest extends FormRequest
 {
     public $rules = [
-        'family.store' => [
-            'name' => 'required',
-            'title' => 'required',
-            'temp_files' => 'required',
-            'age' => 'required|integer|min:0|max:128'
+        'admin::goods_import.store' => [
+            'goods_id' => 'required',
+            'number' => 'required',
+            'image_id' => 'required',
+        ],
+        'admin::goods_import.update' => [
+            'goods_id' => 'required',
+            'number' => 'required',
+            'image_id' => 'required'
         ]
     ];
 
@@ -48,13 +52,9 @@ class FamilyRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '名称必须填写',
-            'title.required' => '称谓必须填写',
-            'temp_files.required' => '照片必须上传',
-            'age.required' => '年龄必须填写范围：0~128',
-            'age.min' => '年龄必须填写范围：0~128',
-            'age.integer' => '年龄必须填写范围：0~128',
-            'age.max' => '年龄必须填写范围：0~128'
+            'goods_id.required' => '商品必须选择',
+            'number.required' => '商品导出数量必须填写',
+            'image_id.required' => '商品导出凭据必须上传'
         ];
     }
 }

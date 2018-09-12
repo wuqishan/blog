@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableCategories extends Migration
+class CreateTableGoodsExport extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateTableCategories extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function(Blueprint $table)
+        Schema::create('goods_export', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('parent_id')->default(0)->comment('父级ID');
-            $table->string('title', 255)->comment('分类名称');
-            $table->text('description');
-            $table->integer('order')->comment('排序');
-            $table->tinyInteger('level')->default(0)->comment('当前等级');
+            $table->integer('user_id')->default(0)->comment('操作用户ID');
+            $table->integer('goods_id')->default(0)->comment('商品ID');
+            $table->integer('number')->default(0)->comment('导入数量');
+            $table->text('images')->comment('图片');
+            $table->text('description')->comment('简述');
+            $table->tinyInteger('deleted')->default(0)->comment('是否删除；1：未删除；2：删除');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
@@ -33,6 +34,6 @@ class CreateTableCategories extends Migration
      */
     public function down()
     {
-        Schema::drop('categories');
+        //
     }
 }

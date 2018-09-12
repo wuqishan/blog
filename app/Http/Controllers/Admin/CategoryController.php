@@ -9,10 +9,7 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    /**
-     * @param CategoryService $service
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    // list
     public function index(CategoryService $service)
     {
         $results['data'] = $service->getList();
@@ -20,16 +17,14 @@ class CategoryController extends Controller
         return view('admin.category.index', ['results' => $results]);
     }
 
-    /**
-     * @param CategoryService $service
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    // 新增 get
     public function create(CategoryService $service)
     {
         $results['form'] = $service->getForm();
         return view('admin.category.create', ['results' => $results]);
     }
 
+    // 新增 post
     public function store(CategoryRequest $request, CategoryService $service)
     {
         $results = ['status' => false];
@@ -38,6 +33,7 @@ class CategoryController extends Controller
         return $results;
     }
 
+    // 编辑 get
     public function edit(Request $request, CategoryService $service)
     {
         $results['detail'] = $service->getDetail($request->category_id);
@@ -46,6 +42,7 @@ class CategoryController extends Controller
         return view('admin.category.edit', ['results' => $results]);
     }
 
+    // 编辑 post
     public function update(CategoryRequest $request, CategoryService $service)
     {
         $params = $request->all();
@@ -54,10 +51,10 @@ class CategoryController extends Controller
         return $results;
     }
 
-
+    // 删除
     public function destroy(Request $request, CategoryService $service)
     {
-        $results['status'] = $service->delete($request->category_id, true);
+        $results['status'] = $service->delete($request->category_id);
 
         return $results;
     }

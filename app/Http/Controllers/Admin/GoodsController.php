@@ -9,12 +9,7 @@ use Illuminate\Http\Request;
 
 class GoodsController extends Controller
 {
-    /**
-     * list 数据获取
-     *
-     * @param GoodsService $service
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    // list
     public function index(GoodsService $service)
     {
         $results['data'] = $service->getList();
@@ -22,24 +17,13 @@ class GoodsController extends Controller
         return view('admin.goods.index', ['results' => $results]);
     }
 
-    /**
-     * 编辑
-     *
-     * @param Request $request
-     * @return string
-     */
+    // 新增 get
     public function create(Request $request)
     {
         return view('admin.goods.create');
     }
 
-    /**
-     * 保存数据
-     *
-     * @param GoodsRequest $request
-     * @param GoodsService $service
-     * @return array
-     */
+    // 新增 post
     public function store(GoodsRequest $request, GoodsService $service)
     {
         $params = $request->all();
@@ -48,13 +32,7 @@ class GoodsController extends Controller
         return $results;
     }
 
-    /**
-     * 编辑数据
-     *
-     * @param Request $request
-     * @param GoodsService $service
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    // 编辑 get
     public function edit(Request $request, GoodsService $service)
     {
         $results['detail'] = $service->getDetail($request->goods_id);
@@ -62,11 +40,7 @@ class GoodsController extends Controller
         return view('admin.goods.edit', ['results' => $results]);
     }
 
-    /**
-     * @param GoodsRequest $request
-     * @param GoodsService $service
-     * @return array
-     */
+    // 编辑 post
     public function update(GoodsRequest $request, GoodsService $service)
     {
         $params = $request->all();
@@ -75,11 +49,7 @@ class GoodsController extends Controller
         return $results;
     }
 
-    /**
-     * @param Request $request
-     * @param GoodsService $service
-     * @return array
-     */
+    // 删除
     public function destroy(Request $request, GoodsService $service)
     {
         $results['status'] = $service->delete($request->goods_id);

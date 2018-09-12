@@ -24,7 +24,7 @@ class CreateTableGoods extends Migration
             $table->integer('export_number')->default(0)->comment('导出数量');
             $table->string('unit', 16)->default('')->comment('单位');
             $table->tinyInteger('status')->default(0)->comment('1：上架；2：下架');
-            $table->tinyInteger('deleted')->default(0)->comment('是否发布；1：未删除；2：删除');
+            $table->tinyInteger('deleted')->default(0)->comment('是否删除；1：未删除；2：删除');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });

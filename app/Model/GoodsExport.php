@@ -2,9 +2,11 @@
 
 namespace App\Model;
 
-class Category extends BaseModel
+class GoodsExport extends BaseModel
 {
-    protected $table = 'categories';
+    protected $table = 'goods_export';
+
+    public $timestamps = true;
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';

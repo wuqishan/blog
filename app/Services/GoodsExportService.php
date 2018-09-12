@@ -2,18 +2,26 @@
 
 namespace App\Services;
 
-use App\Model\Goods;
+use App\Model\GoodsExport;
 
-class GoodsService extends Service
+class GoodsExportService extends Service
 {
-    const IMAGE_TYPE = 1;
+
+    const IMAGE_TYPE = 3;
 
     public $_model = null;
+    public $_table = null;
+    public $_joinTable = [];
 
+    /**
+     * 初始化
+     */
     public function __construct()
     {
         parent::__construct();
-        $this->_model = new Goods();
+        $this->_model = new GoodsExport();
+        $this->_table = $this->_model->getTable();
+        $this->_joinTable = ['goods'];
     }
 
     /**
@@ -27,9 +35,17 @@ class GoodsService extends Service
         $results['list'] = [];
 
         $this->_model = $this->listWhere();
-        $results['total'] = $this->_model->count('id');  // 在分页查询前获取总数量
+        $results['total'] = $this->_model->count($this->_table . '.id');  // 在分页查询前获取总数量
         $this->_model->offset($this->_offset)->limit($this->_length);
-        $dataModel = $this->_model->get();
+        $dataModel = $this->_model->select(
+            [
+                $this->_table.'.*',
+                $this->_joinTable[0].'.title as goods_title',
+                $this->_joinTable[0].'.unit as goods_unit',
+                $this->_joinTable[0].'.status as goods_status',
+                $this->_joinTable[0].'.stock as goods_stock',
+            ]
+        )->get();
 
         if (! empty($dataModel)) {
             $results['list'] = $dataModel->toArray();
@@ -60,24 +76,26 @@ class GoodsService extends Service
     public function saveData($params, $id = 0)
     {
         $id = intval($id);
+        $goods_id = 0;
         if ($id > 0) {
             $detail = $this->_model->find($id);
             if (! empty($detail)) {
-                $detail->title = strip_tags($params['title']);
-                $detail->unit = strip_tags($params['unit']);
-                $detail->status = intval($params['status']);
+                $detail->goods_id = intval($params['goods_id']);
+                $detail->number = intval($params['number']);
+                $detail->images = '';
                 $detail->description = strip_tags($params['description']);
                 $detail->save();
+                $goods_id = $detail->goods_id;
             }
         } else {
             $data = [
-                'title' => strip_tags($params['title']),
-                'unit' => strip_tags($params['unit']),
-                'status' => intval($params['status']),
+                'goods_id' => intval($params['goods_id']),
+                'number' => intval($params['number']),
                 'images' => '',
                 'deleted' => 1,
                 'description' => strip_tags($params['description'])
             ];
+            $goods_id = intval($params['goods_id']);
             $id = $this->_model->insertGetId($data);
         }
 
@@ -87,11 +105,17 @@ class GoodsService extends Service
             $filesService->updateType($params['image_id'], $id, self::IMAGE_TYPE);
         }
 
+        // 更新库存
+        if ($goods_id > 0) {
+            $goodsService = new GoodsService();
+            $goodsService->updateStock($goods_id);
+        }
+
         return $id;
     }
 
     /**
-     * 删除数据 1：未删除；2：删除
+     * 删除数据
      *
      * @param $id
      * @return bool
@@ -104,45 +128,39 @@ class GoodsService extends Service
     }
 
     /**
-     * 更新商品的库存
-     *
-     * @param $goods_id
-     * @return int
+     * @return mixed
      */
-    public function updateStock($goods_id)
+    public function getForm()
     {
-        $goodsExportService = new GoodsExportService();
-        $goodsImportService = new GoodsImportService();
-        $goodsExportNumber = $goodsExportService->getGoodsExport($goods_id);
-        $goodsImportNumber = $goodsImportService->getGoodsImport($goods_id);
+        $goodsService = new GoodsService();
+        $results = $goodsService->getList();
 
-        $results = (bool) $this->_model->where('id', $goods_id)
-            ->update(['stock' => ($goodsImportNumber - $goodsExportNumber)]);
+        return $results['list'];
+    }
 
-        return $results;
+    /**
+     * @param $goods_id
+     * @return mixed
+     */
+    public function getGoodsExport($goods_id)
+    {
+        $total = $this->_model->where('goods_id', $goods_id)->where('deleted', 1)->sum('number');
+
+        return $total;
     }
 
     /**
      * 获取搜索条件
      *
-     * @return Goods|null
+     * @return GoodsExport|null
      */
     public function listWhere()
     {
         $filter = $this->filterSearchParams();
 
         // 处理条件
-        $this->_model = $this->_model->where('deleted', 1);
-        if (isset($filter['keyword']) && ! empty($filter['keyword'])) {
-            $keyword = $filter['keyword'];
-            $this->_model = $this->_model->where(function ($query) use ($keyword) {
-                $query->orWhere('title', 'like', "%{$keyword}%")
-                    ->orWhere('description', 'like', "%{$keyword}%");
-            });
-        }
-        if (isset($filter['status']) && ! empty($filter['status'])) {
-            $this->_model = $this->_model->where('status', $filter['status']);
-        }
+        $this->_model = $this->_model->where($this->_table . '.deleted', 1)
+            ->leftJoin($this->_joinTable[0], $this->_joinTable[0].'.id', '=', $this->_table . '.goods_id');
 
         // 处理排序
         if (
@@ -162,9 +180,7 @@ class GoodsService extends Service
      */
     public function filterSearchParams()
     {
-        $params['keyword'] = strip_tags(request()->get('keyword'));
-        $params['status'] = intval(request()->get('status'));
-        $params['sort_field'] = strip_tags(request()->get('sort_field', 'id'));
+        $params['sort_field'] = strip_tags(request()->get('sort_field', $this->_table . '.id'));
         $params['sort_type'] = strip_tags(request()->get('sort_type', 'desc'));
 
         return array_filter($params);

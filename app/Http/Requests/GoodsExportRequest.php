@@ -5,17 +5,17 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 
-class GoodsRequest extends FormRequest
+class GoodsExportRequest extends FormRequest
 {
     public $rules = [
-        'admin::goods.store' => [
-            'title' => 'required',
-            'unit' => 'required',
+        'admin::goods_export.store' => [
+            'goods_id' => 'required',
+            'number' => 'required',
             'image_id' => 'required',
         ],
-        'admin::goods.update' => [
-            'title' => 'required',
-            'unit' => 'required',
+        'admin::goods_export.update' => [
+            'goods_id' => 'required',
+            'number' => 'required',
             'image_id' => 'required'
         ]
     ];
@@ -52,9 +52,9 @@ class GoodsRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => '商品名称必须填写',
-            'unit.required' => '商品单位必须填写',
-            'image_id.required' => '商品图片必须上传'
+            'goods_id.required' => '商品必须选择',
+            'number.required' => '商品导入数量必须填写',
+            'image_id.required' => '商品导入凭据必须上传'
         ];
     }
 }

@@ -3,32 +3,61 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GoodsImportRequest;
+use App\Services\GoodsImportService;
 use Illuminate\Http\Request;
 
 class GoodsImportController extends Controller
 {
-    public function index(Request $request)
+    // list 数据获取
+    public function index(GoodsImportService $service)
     {
-//        $results['data'] = $service->getList();
+        $results['data'] = $service->getList();
 
-        return view('admin.goods_import.index');
+        return view('admin.goods_import.index', ['results' => $results]);
     }
 
-    public function create(Request $request)
+    // 编辑
+    public function create(Request $request, GoodsImportService $service)
     {
-        return view('admin.goods_import.create');
-    }
-    public function store()
-    {
+        $results['form'] = $service->getForm();
 
+        return view('admin.goods_import.create', ['results' => $results]);
     }
-    public function edit()
-    {
 
+    // 保存数据
+    public function store(GoodsImportRequest $request, GoodsImportService $service)
+    {
+        $params = $request->all();
+        $results['status'] = (bool) $service->saveData($params);
+
+        return $results;
     }
-    public function update()
-    {
 
+    // 编辑数据
+    public function edit(Request $request, GoodsImportService $service)
+    {
+        $results['detail'] = $service->getDetail($request->goods_import_id);
+        $results['form'] = $service->getForm();
+
+        return view('admin.goods_import.edit', ['results' => $results]);
+    }
+
+    // 更新
+    public function update(GoodsImportRequest $request, GoodsImportService $service)
+    {
+        $params = $request->all();
+        $results['status'] = (bool) $service->saveData($params, $request->goods_import_id);
+
+        return $results;
+    }
+
+    // 删除
+    public function destroy(Request $request, GoodsImportService $service)
+    {
+        $results['status'] = $service->delete($request->goods_import_id);
+
+        return $results;
     }
 
 

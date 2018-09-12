@@ -37,8 +37,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
         'parameters' => ['goods' => 'goods_id']
     ]);
 
-    Route::resource('goods_import', 'GoodsImportController');
-    Route::resource('goods_export', 'GoodsExportController');
+    Route::resource('goods_import', 'GoodsImportController', [
+        'parameters' => ['goods_import' => 'goods_import_id']
+    ]);
+    Route::resource('goods_export', 'GoodsExportController', [
+        'parameters' => ['goods_export' => 'goods_export_id']
+    ]);
 
 
 });

@@ -19,8 +19,11 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/single', 'IndexController@single')->name('single');
 });
 
-/*
+
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function () {
+
+    Route::get('/login', 'UserController@login')->name('user.login');
+    Route::get('/do_login', 'UserController@doLogin')->name('user.do_login');
 
     Route::get('/', 'IndexController@index')->name('admin.index');
 
@@ -50,4 +53,3 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], f
 
 
 });
-*/

@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'wechat' => [
+        'app_id' => env('WECHAT_APP_ID'),
+        'app_secret' => env('WECHAT_APP_SECRET'),
+        'app_uri' => env('WECHAT_APP_URI'),
+    ]
 ];

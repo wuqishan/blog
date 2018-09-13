@@ -14930,6 +14930,16 @@ be a descendant of the grid when it is being dragged.
           align-items: center;
 }
 
+.login-content .login-box .utility .login-with-other {
+  width: 25px;
+  height: 25px;
+}
+
+.login-content .login-box .utility .login-with-other img{
+  width: 100%;
+  height: 100%;
+}
+
 .login-content .login-box .btn-container {
   margin-bottom: 0;
 }

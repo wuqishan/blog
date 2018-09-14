@@ -20,10 +20,12 @@ Route::group(['namespace' => 'Home'], function () {
 });
 
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::', 'middleware' => ['web']], function () {
 
     Route::get('/login', 'UserController@login')->name('user.login');
-    Route::get('/do_login', 'UserController@doLogin')->name('user.do_login');
+    Route::post('/do_login', 'UserController@doLogin')->name('user.do_login');
+    Route::get('/login_with_wechat', 'UserController@loginWithWechat')->name('user.login_with_wechat');
+    Route::get('/get_login_wechat_qr_code', 'UserController@getLoginWechatQrCode')->name('user.get_login_wechat_qr_code');
 
     Route::get('/', 'IndexController@index')->name('admin.index');
 

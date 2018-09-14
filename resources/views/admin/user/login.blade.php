@@ -27,7 +27,7 @@
                             {{--</label>--}}
                         {{--</div>--}}
                         <div class="login-with-other">
-                            <a href="javascript:void(0);">
+                            <a target="_blank" href="{{ route('admin::user.get_login_wechat_qr_code') }}">
                                 <img src="{{ asset('/static/admin/images/wechat.png') }}">
                             </a>
                         </div>

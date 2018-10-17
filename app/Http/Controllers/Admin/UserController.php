@@ -11,7 +11,9 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('admin.user.login');
+        $url = WeChatHelper::getLoginUrl();
+
+        return view('admin.user.login', ['url' => $url]);
     }
 
     public function doLogin(Request $request)
@@ -26,7 +28,8 @@ class UserController extends Controller
 
     public function getLoginWechatQrCode()
     {
-        $url = WeChatHelper::getCodeUrl('snsapi_userinfo');
+        $url = WeChatHelper::getLoginUrl();
+
 //dd($url);
         return view('admin.user.qrcode', ['url' => $url]);
     }
